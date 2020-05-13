@@ -59,6 +59,13 @@ namespace bookstoreApp
             {
                 endpoints.MapRazorPages();
             });
+
+            // Запуск миграции БД
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var database = scope.ServiceProvider.GetService<BookstoreDbContext>().Database;
+                database.Migrate();
+            }
         }
     }
 }

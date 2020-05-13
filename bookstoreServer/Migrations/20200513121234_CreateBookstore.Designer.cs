@@ -9,7 +9,7 @@ using bookstoreServer.Database;
 namespace bookstoreApp.Migrations
 {
     [DbContext(typeof(BookstoreDbContext))]
-    [Migration("20200513114709_CreateBookstore")]
+    [Migration("20200513121234_CreateBookstore")]
     partial class CreateBookstore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,20 +43,20 @@ namespace bookstoreApp.Migrations
 
             modelBuilder.Entity("bookstoreServer.Database.Entities.Store", b =>
                 {
-                    b.Property<int>("BookId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("BookId1")
+                    b.Property<int>("BookId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Count")
                         .HasColumnType("integer");
 
-                    b.HasKey("BookId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("BookId1");
+                    b.HasIndex("BookId");
 
                     b.ToTable("Stores");
                 });
@@ -65,7 +65,7 @@ namespace bookstoreApp.Migrations
                 {
                     b.HasOne("bookstoreServer.Database.Entities.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookId1")
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -8,9 +8,14 @@ namespace bookstoreServer.Database.Entities
     public class Store
     {
         /// <summary>
-        /// Идентификатор книги.
+        /// Идентификатор.
         /// </summary>
         [Key]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Идентификатор книги.
+        /// </summary>
         public int BookId { get; set; }
 
         /// <summary>
