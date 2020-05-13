@@ -7,5 +7,10 @@ namespace bookstoreServer.Database
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Store> Stores { get; set; }
+        public BookstoreDbContext(DbContextOptions<BookstoreDbContext> options) 
+            : base(options)
+        {
+            
+        }
     }
 }
