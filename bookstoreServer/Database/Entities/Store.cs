@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace bookstoreServer.Database.Entities
 {
     /// <summary>
@@ -8,6 +10,7 @@ namespace bookstoreServer.Database.Entities
         /// <summary>
         /// Идентификатор книги.
         /// </summary>
+        [Key]
         public int BookId { get; set; }
 
         /// <summary>
