@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using bookstoreServer.Database;
+using bookstoreServer.Database.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,11 +26,12 @@ namespace bookstoreApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BookstoreDbContext> (options => {
-               options.UseNpgsql(
-                   Configuration.GetConnectionString("DefaultConnection"),
-                   builder => 
-                   builder.MigrationsHistoryTable("__EFMigrationHistory")); 
+            services.AddDbContext<BookstoreDbContext>(options =>
+            {
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    builder =>
+                    builder.MigrationsHistoryTable("__EFMigrationHistory"));
             });
             services.AddRazorPages();
         }
@@ -63,9 +65,13 @@ namespace bookstoreApp
             // Запуск миграции БД
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var database = scope.ServiceProvider.GetService<BookstoreDbContext>().Database;
-                database.Migrate();
+                using (var context = scope.ServiceProvider.GetService<BookstoreDbContext>())
+                {
+                    context.Database.Migrate(); //создание базы
+                    DatabaseSeeder.Seed(context);
+                }
             }
+
         }
     }
 }
