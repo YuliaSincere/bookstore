@@ -50,7 +50,7 @@ namespace bookstoreApp
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -59,7 +59,12 @@ namespace bookstoreApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                /*
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Bookstore}/{action=Index}");
+                */
             });
 
             // Запуск миграции БД
