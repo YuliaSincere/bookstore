@@ -34,6 +34,9 @@ namespace bookstoreApp.Controllers
         {
             var result = new BookTest();
 
+            result.Id = s.Book.Id;
+            result.Name = s.Book.Name;
+            result.Price = s.Book.Price;
             result.Description = s.Book.Description;
             result.Count = s.Count;
 
