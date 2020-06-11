@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import { BookProvider } from '../Services/bookprovider';
-import { Book } from '../Models/book';
+import { BookProvider } from '../../../Services/bookprovider';
+import { Book } from '../../../Models/book';
 
 @Component({
     selector: 'app-bookstore',
