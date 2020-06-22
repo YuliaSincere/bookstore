@@ -1,8 +1,9 @@
-<div>
-    <h2>My Books</h2>
-    <ul class="books">
-        <li>
-            <span>{{book.id}} {{book.name}} {{book.description}} {{book.price}} {{book.count}}</span>
-        </li>
-    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">{{book.id}}</div>
+        <div class="col-sm book">{{book.name}}</div>
+        <div class="col-sm">{{book.description}}</div>
+        <div class="col-sm">{{book.price}} руб.</div>
+        <div class="col-sm">{{book.count}}</div>
+    </div>
 </div>

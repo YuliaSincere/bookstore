@@ -1,0 +1,32 @@
+    // color palette
+    $p1:rgb(78, 57, 147);
+    $p2:rgb(156, 151, 200);
+    $o1:rgb(240, 102, 65);
+    $o2:rgb(251, 218, 198);
+    //other
+    $main-margin: 1%;
+    .childContainer {
+        height: 660px;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: stretch;
+    }
+    
+    .bookstorePlacement {
+        padding: 2px;
+        background-color: $p2;
+        flex: 1;
+        margin-bottom: $main-margin;
+        margin-right: 0.5%;
+        border-bottom-right-radius: 10%;
+        margin-bottom: 20px;
+    }
+    
+    .userplacePlacement {
+        background-color: rgb(255, 255, 255);
+        flex: 1;
+        margin-bottom: $main-margin;
+        margin-left: 0.5%;
+    }
