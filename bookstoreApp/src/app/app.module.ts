@@ -11,6 +11,7 @@ import { HeaderComponent } from './Components/header/header.component';
 import { ContentComponent } from './Components/content/content.component';
 import { CartComponent } from './Components/content/cart/cart.component';
 import { UserplaceComponent } from './Components/userplace/userplace.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserplaceComponent } from './Components/userplace/userplace.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [BookProvider],
   bootstrap: [AppComponent]

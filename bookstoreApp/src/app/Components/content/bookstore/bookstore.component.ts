@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { BookProvider } from '../../../Services/bookprovider';
 import { Book } from '../../../Models/book';
 
@@ -8,14 +8,15 @@ import { Book } from '../../../Models/book';
     styleUrls: ['./bookstore.component.scss']
 })
 
-export class BookstoreComponent {
-    private bookProvider: BookProvider; //this
+export class BookstoreComponent implements OnInit {
+    public books: Book[];
 
-    constructor(bookProvider: BookProvider) {
+    constructor(private bookProvider: BookProvider) {
         this.bookProvider = bookProvider;
     }
 
-    get books(): Book[] {
-        return this.bookProvider.books;
+    ngOnInit(): void {
+        this.bookProvider.getBooks()
+            .subscribe((books: Book[]) => this.books = books);
     }
 }
