@@ -58,12 +58,11 @@ namespace bookstoreApp.Controllers
             var result = new CartDto();
 
             result.Name = c.Book.Name;
-            // TODO раскомментить после миграции.
-            //result.CustomerId = c.CustomerId;
+            result.CustomerId = c.CustomerId;
             result.Description = c.Book.Description;
-            result.BookCount = c.BookCount;
             result.Price = c.Book.Price;
 
+            result.BookCount = c.BookCount;
 
             return result;
         }

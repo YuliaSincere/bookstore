@@ -12,6 +12,7 @@ import { ContentComponent } from './Components/content/content.component';
 import { CartComponent } from './Components/content/cart/cart.component';
 import { UserplaceComponent } from './Components/userplace/userplace.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BookInCartComponent } from './Components/bookInCart/bookInCart.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     ContentComponent,
     CartComponent,
-    UserplaceComponent
+    UserplaceComponent,
+    BookInCartComponent
   ],
   imports: [
     BrowserModule,
