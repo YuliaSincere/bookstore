@@ -2,16 +2,13 @@ using bookstoreServer.Database;
 using bookstoreServer.Database.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 
 
 namespace bookstoreApp.Controllers
 {
-    [Route("api/store")]
+    [Route("api")]
     [ApiController]
     public class BookstoreController : Controller
     {
@@ -21,24 +18,52 @@ namespace bookstoreApp.Controllers
         {
             _context = context;
         }
-
+        /// <summary>
+        /// возвращает список книг, оставшихся на складе
+        /// </summary>
+        /// <returns></returns>
+        [Route("store")]
         [HttpGet]
-        public IEnumerable<BookTest> GetBookTest()
+        public IEnumerable<BookDto> GetBookDto()
         {
             return _context.Stores
                 .Include(s => s.Book)
                 .Select(s => ConvertToDto(s)).ToList();
         }
 
-        static private BookTest ConvertToDto(Store s)
+        static private BookDto ConvertToDto(Store s)
         {
-            var result = new BookTest();
+            var result = new BookDto();
 
             result.Id = s.Book.Id;
             result.Name = s.Book.Name;
             result.Price = s.Book.Price;
             result.Description = s.Book.Description;
             result.Count = s.Count;
+
+            return result;
+        }
+
+        [Route("cart")]
+        [HttpGet]
+        public IEnumerable<CartDto> GetCart()
+        {
+            return _context.Cart
+                .Include(c => c.Book)
+                .Select(c => ConvertToDto(c)).ToList();
+        }
+
+        static private CartDto ConvertToDto(Cart c)
+        {
+            var result = new CartDto();
+
+            result.Name = c.Book.Name;
+            // TODO раскомментить после миграции.
+            //result.CustomerId = c.CustomerId;
+            result.Description = c.Book.Description;
+            result.BookCount = c.BookCount;
+            result.Price = c.Book.Price;
+
 
             return result;
         }
