@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace bookstoreServer.Database.Entities
@@ -14,10 +15,10 @@ namespace bookstoreServer.Database.Entities
         [Key]
         public int Id { get; set; }
 
-        /// <summary>
-        /// Идентификатор покупателя.
-        /// </summary>
-        public int CustomerId { get; set; }
+        // /// <summary>
+        // /// Идентификатор покупателя.
+        // /// </summary>
+        // public Guid CustomerId { get; set; }
 
         /// <summary>
         /// Идентификатор книги.
