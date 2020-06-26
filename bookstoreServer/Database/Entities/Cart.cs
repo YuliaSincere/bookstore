@@ -15,10 +15,10 @@ namespace bookstoreServer.Database.Entities
         [Key]
         public int Id { get; set; }
 
-        // /// <summary>
-        // /// Идентификатор покупателя.
-        // /// </summary>
-        // public Guid CustomerId { get; set; }
+        /// <summary>
+        /// Идентификатор покупателя.
+        /// </summary>
+        public Guid CustomerId { get; set; }
 
         /// <summary>
         /// Идентификатор книги.
