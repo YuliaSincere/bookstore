@@ -1,0 +1,13 @@
+// color palette
+$p1:rgb(78, 57, 147);
+$p2:rgb(156, 151, 200);
+$o1:rgb(240, 102, 65);
+$o2:rgb(251, 218, 198);
+.buttonContainer {
+    width: 100px;
+    height: 50px;
+    background-color: $o1;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 30px;
+}

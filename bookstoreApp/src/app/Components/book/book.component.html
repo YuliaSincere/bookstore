@@ -1,9 +1,11 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm">{{book.id}}</div>
         <div class="col-sm book">{{book.name}}</div>
         <div class="col-sm">{{book.description}}</div>
         <div class="col-sm">{{book.price}} руб.</div>
         <div class="col-sm">{{book.count}}</div>
+        <div class="col-sm">
+            <app-buyButton [book]="book"></app-buyButton>
+        </div>
     </div>
 </div>

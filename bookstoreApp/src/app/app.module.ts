@@ -13,6 +13,7 @@ import { CartComponent } from './Components/content/cart/cart.component';
 import { UserplaceComponent } from './Components/userplace/userplace.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BookInCartComponent } from './Components/bookInCart/bookInCart.component';
+import { BuyButtonComponent } from './Components/buyButton/buyButton.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BookInCartComponent } from './Components/bookInCart/bookInCart.componen
     ContentComponent,
     CartComponent,
     UserplaceComponent,
-    BookInCartComponent
+    BookInCartComponent,
+    BuyButtonComponent
   ],
   imports: [
     BrowserModule,
