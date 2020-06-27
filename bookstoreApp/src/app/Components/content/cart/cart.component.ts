@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { BookInCart } from 'src/app/Models/bookInCart';
-import { BookInCartProvider } from 'src/app/Services/cartprovider';
+import { CartService } from 'src/app/Services/CartService';
 
 @Component({
     selector: 'app-cart',
@@ -11,12 +11,12 @@ import { BookInCartProvider } from 'src/app/Services/cartprovider';
 export class CartComponent implements OnInit {
     public booksInCart: BookInCart[];
 
-    constructor(private bookInCartProvider: BookInCartProvider) {
-        this.bookInCartProvider = bookInCartProvider;
+    constructor(private cartService: CartService) {
+        this.cartService = cartService;
     }
 
     ngOnInit(): void {
-        this.bookInCartProvider.getBooksInCart()
+        this.cartService.getBooksInCart()
             .subscribe((booksInCart: BookInCart[]) => this.booksInCart = booksInCart);
     }
 }
