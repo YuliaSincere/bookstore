@@ -19,8 +19,7 @@ export class BuyButtonComponent {
         this.cartService = cartService;
     }
 
-    onClick(){
-       // alert(this.book.id);
-        this.cartService.addBookToCart(this.book.id);
+    async onClick(){
+        const result = await this.cartService.addBookToCart(this.book.id);
     }
 }

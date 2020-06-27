@@ -16,7 +16,15 @@ export class CartComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.cartService.getBooksInCart()
-            .subscribe((booksInCart: BookInCart[]) => this.booksInCart = booksInCart);
+        this.getBookInCart();
+    }
+
+    private async getBookInCart() {
+        try {
+            this.booksInCart = await this.cartService.getBooksInCart();
+            
+        } catch (error) {
+            console.log(error);
+        }
     }
 }

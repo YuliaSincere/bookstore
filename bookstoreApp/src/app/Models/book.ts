@@ -1,3 +1,5 @@
+import { NodeCompatibleEventEmitter } from 'rxjs/internal/observable/fromEvent';
+
 export interface Book {
     id: number;
     name: string;
@@ -5,4 +7,5 @@ export interface Book {
     price: number;
     count: number;
 }
+
 

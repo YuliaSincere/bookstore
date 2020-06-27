@@ -12,6 +12,8 @@ namespace bookstoreApp.Controllers
     [ApiController]
     public class BookstoreController : Controller
     {
+        private object _lockStoreTable = new object();
+
         private readonly BookstoreDbContext _context;
 
         public BookstoreController(BookstoreDbContext context)
@@ -26,9 +28,12 @@ namespace bookstoreApp.Controllers
         [HttpGet]
         public IEnumerable<BookDto> GetBookDto()
         {
-            return _context.Stores
-                .Include(s => s.Book)
-                .Select(s => ConvertToDto(s)).ToList();
+            lock (_lockStoreTable)
+            {
+                return _context.Stores
+                    .Include(s => s.Book)
+                    .Select(s => ConvertToDto(s)).ToList();
+            }
         }
 
         static private BookDto ConvertToDto(Store s)
@@ -42,6 +47,14 @@ namespace bookstoreApp.Controllers
             result.Count = s.Count;
 
             return result;
+        }
+
+        [Route("cart/add")]
+        [HttpPost]
+        public bool AddBookToCart(AddBookDto addBookDto)
+        {
+            // TODO: Использовать lock() при работе с таблицей остатков книг.
+            return true;
         }
 
         [Route("cart")]
