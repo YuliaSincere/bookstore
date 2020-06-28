@@ -2,6 +2,7 @@ using bookstoreServer.Database;
 using bookstoreServer.Database.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,7 +33,9 @@ namespace bookstoreApp.Controllers
             {
                 return _context.Stores
                     .Include(s => s.Book)
+                    .OrderBy(s => s.BookId)
                     .Select(s => ConvertToDto(s)).ToList();
+        
             }
         }
 
@@ -54,6 +57,34 @@ namespace bookstoreApp.Controllers
         public bool AddBookToCart(AddBookDto addBookDto)
         {
             // TODO: Использовать lock() при работе с таблицей остатков книг.
+            if (!_context.Books.Any(book => book.Id == addBookDto.BookId))
+            {
+                return false;
+            }
+            lock (_lockStoreTable)
+            {
+                var storeItem = _context.Stores
+                    .SingleOrDefault(s => s.BookId == addBookDto.BookId && s.Count > 0);
+                if (storeItem == null)
+                {
+                    return false;
+                }
+                storeItem.Count--;
+                _context.SaveChanges();
+            }
+            Guid newCustomerId = Guid.Parse(addBookDto.CustomerId);
+            var cartItem = _context.Cart
+                .SingleOrDefault(c => c.BookId == addBookDto.BookId
+                 && c.CustomerId == newCustomerId);
+            
+            if (cartItem == null)
+            {   
+                // Создание новой записи о книге в корзине если нет записи.
+                cartItem = new Cart {BookId=addBookDto.BookId, CustomerId=newCustomerId, BookCount=0};
+                _context.Add(cartItem);
+            }
+            cartItem.BookCount++;
+            _context.SaveChanges();
             return true;
         }
 
@@ -63,6 +94,7 @@ namespace bookstoreApp.Controllers
         {
             return _context.Cart
                 .Include(c => c.Book)
+                .OrderBy(s => s.BookId)
                 .Select(c => ConvertToDto(c)).ToList();
         }
 

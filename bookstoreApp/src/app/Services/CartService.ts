@@ -2,7 +2,6 @@ import { BookInCart } from '../Models/bookInCart'
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AddBookDto } from '../Models/AddBookDto';
 
 @Injectable({
     providedIn: 'root',
@@ -25,7 +24,7 @@ export class CartService {
         console.log(bookId);
         // TODO: customerId: customerId после получения.
 
-        const data = { bookId: bookId, customerId: '' };
+        const data = { bookId: bookId, customerId: '{64A4A6E3-894A-4504-927F-57CBB42FD17D}' };
         return this.http
             .post<boolean>(this.addBookToCartUrl, data)
             .toPromise();
