@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
     providedIn: 'root',
@@ -13,8 +15,18 @@ export class SignalService {
     constructor() {
         this.onUpdateBookstore = new Subject<any>();
         this.onUpdateCart = new Subject<string>();
+
+        let connectionUrl = "";
+        if (!environment.production)
+        {
+            connectionUrl = environment.signalRServer;
+        }
+
+        connectionUrl += "/hubs";
+
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("http://localhost:5000/hubs")
+            .withAutomaticReconnect()
+            .withUrl(connectionUrl)
             .build();
 
         connection.on("SendUpdateBookstore", () => {
