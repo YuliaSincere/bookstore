@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookInCartComponent } from './Components/bookInCart/bookInCart.component';
 import { BuyButtonComponent } from './Components/buyButton/buyButton.component';
 import { CartService } from './Services/CartService';
+import { AuthorizationComponent } from './Authorization/authorization.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,12 +32,17 @@ import { CartService } from './Services/CartService';
     CartComponent,
     UserplaceComponent,
     BookInCartComponent,
-    BuyButtonComponent
+    BuyButtonComponent,
+    AuthorizationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule
   ],
   providers: [BookProvider, CartService],
   bootstrap: [AppComponent]

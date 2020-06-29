@@ -1,0 +1,67 @@
+ // color palette
+ $p1:#f4f6ff;
+ $p2:#ffcb74;
+ $p3:#ea907a;
+ $p4:#4f8a8b;
+ //
+ .buttonEnter {
+     background-color: $p4;
+     font-size: 24px;
+     width: auto;
+     height: 50px;
+     margin-left: 45px;
+ }
+ 
+ .buttonGet {
+     background-color: $p3;
+     font-size: 24px;
+     width: auto;
+     height: 50px;
+     margin-left: 22px;
+ }
+ 
+ .authorizationContainer {
+     text-align: center;
+     background-color: $p1;
+     width: 300px;
+     height: 380px;
+     border-radius: 10px;
+     box-shadow: 4px 4px 4px black;
+     margin-top: 100px;
+     margin-left: 40%;
+     padding-top: 30px;
+     padding-bottom: 20px;
+     //  padding-right: 70px;
+     //  padding-left: 70px;
+ }
+ 
+ .LabelPromo1 {
+     font-size: 20px;
+     color: black;
+     text-align: justify;
+     width: 300px;
+     margin-bottom: 20px;
+     margin-left: -40px;
+ }
+ 
+ .LabelPromo2 {
+     font-size: 20px;
+     color: black;
+     text-align: justify;
+     width: 300px;
+     margin-bottom: 20px;
+ }
+ 
+ #promo {
+     font-size: 20px;
+     height: 40px;
+     color: black;
+     border-color: $p4;
+     border-width: 0.1px;
+     border-style: solid;
+     border-radius: 10px;
+     width: auto;
+     margin-left: -37px;
+     margin-bottom: 10px;
+     ;
+ }
