@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using bookstoreServer.Database;
 using bookstoreServer.Database.Entities;
+using BookstoreSignal.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +30,17 @@ namespace bookstoreApp
                     builder.MigrationsHistoryTable("__EFMigrationHistory"));
             });
             services.AddRazorPages();
+            services.AddCors(options =>
+                options.AddPolicy(
+                    "CorsPolicy",
+                     builder =>
+                        {
+                            builder.AllowAnyMethod()
+                                .AllowAnyHeader()
+                                .WithOrigins("http://localhost:4200")
+                                .AllowCredentials();
+                        }));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,10 +63,11 @@ namespace bookstoreApp
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors("CorsPolicy");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<BookstoreHub>("/hubs");
                 /*
                 endpoints.MapControllerRoute(
                 name: "default",

@@ -14,8 +14,8 @@ export class BookProvider {
 
     private booksUrl = 'api/store'; //url to web api
 
-    getBooks(): Observable<Book[]> {
-        return this.http.get<Book[]>(this.booksUrl);
+    getBooks(): Promise<Book[]> {
+        return this.http.get<Book[]>(this.booksUrl).toPromise();
     }
 
 }

@@ -1,6 +1,9 @@
 using bookstoreServer.Database;
 using bookstoreServer.Database.Entities;
+using bookstoreServer.Interfaces;
+using BookstoreSignal.Hubs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,9 +19,13 @@ namespace bookstoreApp.Controllers
         private object _lockStoreTable = new object();
 
         private readonly BookstoreDbContext _context;
+        private readonly IHubContext<BookstoreHub, IBookStoreHub> _hubContext;
 
-        public BookstoreController(BookstoreDbContext context)
+        public BookstoreController(
+            BookstoreDbContext context,
+            IHubContext<BookstoreHub, IBookStoreHub> hubContext)
         {
+            _hubContext = hubContext;
             _context = context;
         }
         /// <summary>
@@ -35,7 +42,7 @@ namespace bookstoreApp.Controllers
                     .Include(s => s.Book)
                     .OrderBy(s => s.BookId)
                     .Select(s => ConvertToDto(s)).ToList();
-        
+
             }
         }
 
@@ -76,15 +83,19 @@ namespace bookstoreApp.Controllers
             var cartItem = _context.Cart
                 .SingleOrDefault(c => c.BookId == addBookDto.BookId
                  && c.CustomerId == newCustomerId);
-            
+
             if (cartItem == null)
-            {   
+            {
                 // Создание новой записи о книге в корзине если нет записи.
-                cartItem = new Cart {BookId=addBookDto.BookId, CustomerId=newCustomerId, BookCount=0};
+                cartItem = new Cart { BookId = addBookDto.BookId, CustomerId = newCustomerId, BookCount = 0 };
                 _context.Add(cartItem);
             }
             cartItem.BookCount++;
             _context.SaveChanges();
+
+            _hubContext.Clients.All.SendUpdateCart(newCustomerId);
+            _hubContext.Clients.All.SendUpdateBookstore(newCustomerId);
+
             return true;
         }
 
