@@ -11,9 +11,9 @@ namespace BookstoreSignal.Hubs
         {
             await Clients.All.SendUpdateCart(CustomerId);
         }
-        public async Task SendUpdateBookstore(Guid CustomerId)
+        public async Task SendUpdateBookstore()
         {
-            await Clients.All.SendUpdateBookstore(CustomerId);
+            await Clients.All.SendUpdateBookstore();
         }
     }
 }

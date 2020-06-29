@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { BookProvider } from '../../../Services/BookProvider';
 import { Book } from '../../../Models/book';
 import * as signalR from '@microsoft/signalr';
+import { Subscription } from 'rxjs';
+import { SignalService } from 'src/app/Services/SignalService';
 
 @Component({
     selector: 'app-bookstore',
@@ -9,24 +11,26 @@ import * as signalR from '@microsoft/signalr';
     styleUrls: ['./bookstore.component.scss']
 })
 
-export class BookstoreComponent implements OnInit {
+export class BookstoreComponent implements OnInit,  OnDestroy {
+
+    private onUpdateBookstoreSubscription: Subscription;
+
     public books: Book[];
 
-    constructor(private bookProvider: BookProvider) {
+    constructor(private bookProvider: BookProvider, private signalService: SignalService) {
         this.bookProvider = bookProvider;
+        this.signalService = signalService;
+
+        this.onUpdateBookstoreSubscription = this.signalService.onUpdateBookstore$.subscribe(any => {
+            this.getBooks();
+        })
+    }
+    ngOnDestroy(): void {
+        this.onUpdateBookstoreSubscription.unsubscribe();
     }
 
     ngOnInit(): void {
         this.getBooks();
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("http://localhost:5000/hubs")
-            .build();
-
-        connection.on("SendUpdateBookstore", (CustomerId: string) => {
-            console.log('puk2');
-            this.getBooks();
-        });
-        connection.start().catch(err => document.write(err));
     }
 
     private async getBooks() {

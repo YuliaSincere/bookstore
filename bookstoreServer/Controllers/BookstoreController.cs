@@ -63,7 +63,6 @@ namespace bookstoreApp.Controllers
         [HttpPost]
         public bool AddBookToCart(AddBookDto addBookDto)
         {
-            // TODO: Использовать lock() при работе с таблицей остатков книг.
             if (!_context.Books.Any(book => book.Id == addBookDto.BookId))
             {
                 return false;
@@ -94,16 +93,17 @@ namespace bookstoreApp.Controllers
             _context.SaveChanges();
 
             _hubContext.Clients.All.SendUpdateCart(newCustomerId);
-            _hubContext.Clients.All.SendUpdateBookstore(newCustomerId);
+            _hubContext.Clients.All.SendUpdateBookstore();
 
             return true;
         }
 
         [Route("cart")]
         [HttpGet]
-        public IEnumerable<CartDto> GetCart()
+        public IEnumerable<CartDto> GetCart(string customerId)
         {
             return _context.Cart
+            // TODO: сделать фильтр по customerID;
                 .Include(c => c.Book)
                 .OrderBy(s => s.BookId)
                 .Select(c => ConvertToDto(c)).ToList();

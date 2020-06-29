@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { BookInCart } from 'src/app/Models/bookInCart';
 import { CartService } from 'src/app/Services/CartService';
-
-import * as signalR from "@microsoft/signalr";
+import { SignalService } from 'src/app/Services/SignalService';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-cart',
@@ -11,30 +11,35 @@ import * as signalR from "@microsoft/signalr";
 })
 
 
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
+
+    private onUpdateCartSubscription: Subscription;
+
     public booksInCart: BookInCart[];
 
-    constructor(private cartService: CartService) {
+    constructor(private cartService: CartService, private signalService: SignalService) {
         this.cartService = cartService;
+        this.signalService = signalService;
+
+        this.onUpdateCartSubscription = this.signalService.onUpdateCart$.subscribe(customerId => {
+            this.getBookInCart(customerId);
+        })
+    }
+
+    ngOnDestroy(): void {
+        this.onUpdateCartSubscription.unsubscribe();
     }
 
     ngOnInit(): void {
-        this.getBookInCart();
-
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("http://localhost:5000/hubs")
-            .build();
-
-        connection.on("SendUpdateCart", (CustomerId: string) => {
-            console.log('puk1');
-            this.getBookInCart();
-        });
-        connection.start().catch(err => document.write(err));
+        this.getBookInCart('');
     }
 
-    private async getBookInCart() {
+    /**
+     * Обновление корзины.
+     */
+    private async getBookInCart(customerId: string) {
         try {
-            this.booksInCart = await this.cartService.getBooksInCart();
+            this.booksInCart = await this.cartService.getBooksInCart(customerId);
 
         } catch (error) {
             console.log(error);
