@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,7 @@ import { BuyButtonComponent } from './Components/buyButton/buyButton.component';
 import { CartService } from './Services/CartService';
 import { AuthorizationComponent } from './Authorization/authorization.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomerService } from './Services/CustomerService';
 
 @NgModule({
   declarations: [
@@ -42,9 +45,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     NoopAnimationsModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule,
+    FormsModule
   ],
-  providers: [BookProvider, CartService],
+  providers: [BookProvider, CartService, CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,9 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm book">{{bookInCart.name}}</div>
-        <div class="col-sm">{{bookInCart.description}}</div>
-        <div class="col-sm">{{bookInCart.price}} руб.</div>
-        <div class="col-sm">{{bookInCart.bookCount}}</div>
+    <div class="name">{{bookInCart.name}}</div>
+    <div class="price">{{bookInCart.price}} руб.</div>
+    <div class="count">{{bookInCart.bookCount}}</div>
+    <div class="buttonNotBuy">
+        <!--TODO: передать параметры кнопке (click)="onClickEnter()" -->
+        <button mat-raised-button class="buttonNotGet">Отмена</button>
     </div>
 </div>

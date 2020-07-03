@@ -4,6 +4,9 @@ import { CartService } from 'src/app/Services/CartService';
 import { SignalService } from 'src/app/Services/SignalService';
 import { Subscription } from 'rxjs';
 
+import { Guid } from "guid-typescript";
+import { CustomerService } from 'src/app/Services/CustomerService';
+
 @Component({
     selector: 'app-cart',
     templateUrl: './cart.component.html',
@@ -17,9 +20,10 @@ export class CartComponent implements OnInit, OnDestroy {
 
     public booksInCart: BookInCart[];
 
-    constructor(private cartService: CartService, private signalService: SignalService) {
+    constructor(private cartService: CartService, private signalService: SignalService, private customerService: CustomerService) {
         this.cartService = cartService;
         this.signalService = signalService;
+        this.customerService = customerService;
 
         this.onUpdateCartSubscription = this.signalService.onUpdateCart$.subscribe(customerId => {
             this.getBookInCart(customerId);
@@ -30,14 +34,14 @@ export class CartComponent implements OnInit, OnDestroy {
         this.onUpdateCartSubscription.unsubscribe();
     }
 
-    ngOnInit(): void {
-        this.getBookInCart('');
+    ngOnInit(): void {-
+        this.getBookInCart(this.customerService.customerId);
     }
 
     /**
      * Обновление корзины.
      */
-    private async getBookInCart(customerId: string) {
+    private async getBookInCart(customerId: Guid) {
         try {
             this.booksInCart = await this.cartService.getBooksInCart(customerId);
 

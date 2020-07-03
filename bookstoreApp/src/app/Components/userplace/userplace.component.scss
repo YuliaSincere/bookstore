@@ -1,23 +1,28 @@
- // color palette
- $p1:rgb(78, 57, 147);
- $p2:rgb(156, 151, 200);
- $o1:rgb(240, 102, 65);
- $o2:rgb(251, 218, 198);
- //other
- $main-margin: 1%;
- .headerPlacement {
-     background-color: rgb(255, 255, 255);
-     margin-bottom: 20px;
-     height: 160px;
- }
- 
- .cartPlacement {
-     padding: 2px;
-     height: 530px;
-     background-color: $o2;
-     flex: 1;
-     margin-bottom: $main-margin;
-     margin-left: 0.5%;
-     border-top-left-radius: 10%;
-     border-bottom-left-radius: 10%;
- }
+// color palette
+$p1:rgb(78, 57, 147);
+$p2:rgb(156, 151, 200);
+$o1:rgb(240, 102, 65);
+$o2:rgb(251, 218, 198);
+//other
+$main-margin: 1%;
+.userplaceContainer {
+    height: 860px;
+    background-color: rgb(255, 255, 255);
+    margin-left: 0.5%;
+}
+
+.headerPlacement {
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+    height: 160px;
+}
+
+.cartPlacement {
+    padding: 15px;
+    padding-left: 25px;
+    background-color: $p2;
+    flex: 1;
+    margin-right: 0.5%;
+    margin-bottom: 20px;
+    border-top-left-radius: 10%;
+}

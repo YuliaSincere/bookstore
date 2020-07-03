@@ -1,7 +1,8 @@
 import { BookInCart } from '../Models/bookInCart'
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { Guid } from "guid-typescript";
 
 @Injectable({
     providedIn: 'root',
@@ -13,8 +14,8 @@ export class CartService {
 
     constructor(private http: HttpClient) { }
 
-    async getBooksInCart(customerId: string): Promise<BookInCart[]> {
-        const params = new HttpParams().set('customerId', customerId);
+    async getBooksInCart(customerId: Guid): Promise<BookInCart[]> {
+        const params = new HttpParams().set('customerId', customerId.toString());
         return this.http.get<BookInCart[]>(this.booksInCartUrl,{params: params}).toPromise();
     }
 

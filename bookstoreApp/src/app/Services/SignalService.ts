@@ -3,6 +3,8 @@ import * as signalR from '@microsoft/signalr';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+import { Guid } from "guid-typescript";
+
 
 @Injectable({
     providedIn: 'root',
@@ -10,11 +12,11 @@ import { environment } from 'src/environments/environment';
 export class SignalService {
 
     private readonly onUpdateBookstore: Subject<any>;
-    private readonly onUpdateCart: Subject<string>;
+    private readonly onUpdateCart: Subject<Guid>;
 
     constructor() {
         this.onUpdateBookstore = new Subject<any>();
-        this.onUpdateCart = new Subject<string>();
+        this.onUpdateCart = new Subject<Guid>();
 
         let connectionUrl = "";
         if (!environment.production)
@@ -32,7 +34,7 @@ export class SignalService {
         connection.on("SendUpdateBookstore", () => {
             this.onUpdateBookstore.next();
         });
-        connection.on("SendUpdateCart", (customerId: string) => {
+        connection.on("SendUpdateCart", (customerId: Guid) => {
             this.onUpdateCart.next(customerId);
         });
         connection.start().catch(err => document.write(err));
@@ -41,7 +43,7 @@ export class SignalService {
     get onUpdateBookstore$(): Observable<any> {
         return this.onUpdateBookstore.asObservable();
     }
-    get onUpdateCart$(): Observable<string> {
+    get onUpdateCart$(): Observable<Guid> {
         return this.onUpdateCart.asObservable();
     }
 }
