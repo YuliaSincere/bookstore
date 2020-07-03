@@ -100,13 +100,14 @@ namespace bookstoreApp.Controllers
 
         [Route("cart")]
         [HttpGet]
-        public IEnumerable<CartDto> GetCart(string customerId)
+        public IEnumerable<CartDto> GetCart(Guid customerId)
         {
             return _context.Cart
-            // TODO: сделать фильтр по customerID;
+                .Where(c => c.CustomerId == customerId) //Фильтр по кастомер айди
                 .Include(c => c.Book)
                 .OrderBy(s => s.BookId)
-                .Select(c => ConvertToDto(c)).ToList();
+                .Select(c => ConvertToDto(c))
+                .ToList();
         }
 
         static private CartDto ConvertToDto(Cart c)

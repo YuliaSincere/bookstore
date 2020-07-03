@@ -34,8 +34,8 @@ export class SignalService {
         connection.on("SendUpdateBookstore", () => {
             this.onUpdateBookstore.next();
         });
-        connection.on("SendUpdateCart", (customerId: Guid) => {
-            this.onUpdateCart.next(customerId);
+        connection.on("SendUpdateCart", (customerId: string) => {
+            this.onUpdateCart.next(Guid.parse(customerId.toUpperCase()));
         });
         connection.start().catch(err => document.write(err));
 

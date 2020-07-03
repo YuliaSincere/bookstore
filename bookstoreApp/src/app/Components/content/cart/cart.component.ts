@@ -26,7 +26,10 @@ export class CartComponent implements OnInit, OnDestroy {
         this.customerService = customerService;
 
         this.onUpdateCartSubscription = this.signalService.onUpdateCart$.subscribe(customerId => {
-            this.getBookInCart(customerId);
+            if (customerId.equals(this.customerService.customerId)) 
+            {
+                this.getBookInCart(this.customerService.customerId);
+            }
         })
     }
 

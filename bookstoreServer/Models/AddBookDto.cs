@@ -1,3 +1,5 @@
+using System;
+
 public class AddBookDto
 {
     public int BookId { get; set; }
