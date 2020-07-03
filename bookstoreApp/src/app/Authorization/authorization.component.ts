@@ -20,7 +20,8 @@ export class AuthorizationComponent {
             .replace("{", "")
             .replace("}", "");
 
-        const g1 = Guid.parse(guidString);this.router.navigateByUrl('/bookstore');
+        const g1 = Guid.parse(guidString);
+        this.router.navigateByUrl('/bookstore');
 
         this.customerService.customerId = g1;
     }
