@@ -67,17 +67,6 @@ namespace bookstoreApp.Controllers
             {
                 return false;
             }
-            lock (_lockStoreTable)
-            {
-                var storeItem = _context.Stores
-                    .SingleOrDefault(s => s.BookId == addBookDto.BookId && s.Count > 0);
-                if (storeItem == null)
-                {
-                    return false;
-                }
-                storeItem.Count--;
-                _context.SaveChanges();
-            }
             Guid newCustomerId = Guid.Parse(addBookDto.CustomerId);
             var cartItem = _context.Cart
                 .SingleOrDefault(c => c.BookId == addBookDto.BookId
@@ -89,12 +78,27 @@ namespace bookstoreApp.Controllers
                 cartItem = new Cart { BookId = addBookDto.BookId, CustomerId = newCustomerId, BookCount = 0 };
                 _context.Add(cartItem);
             }
+            if (cartItem.BookCount < 1) 
+            {
             cartItem.BookCount++;
+
+            lock (_lockStoreTable)
+            {
+                var storeItem = _context.Stores
+                    .SingleOrDefault(s => s.BookId == addBookDto.BookId && s.Count > 0);
+                if (storeItem == null)
+                {
+                    return false;
+                }
+                storeItem.Count--;
+                _context.SaveChanges();
+            }
+            
             _context.SaveChanges();
 
             _hubContext.Clients.All.SendUpdateCart(newCustomerId);
             _hubContext.Clients.All.SendUpdateBookstore();
-
+            }
             return true;
         }
 
