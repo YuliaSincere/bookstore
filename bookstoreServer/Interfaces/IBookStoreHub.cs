@@ -13,7 +13,7 @@ namespace bookstoreServer.Interfaces
         /// </summary>
         /// <param name="CustomerId">Идентификатор покупателя.</param>
         /// <returns></returns>
-         Task SendUpdateCart(Guid CustomerId);
+         Task SendUpdateCart(Guid CustomerId, bool allowToCheckout);
          Task SendUpdateBookstore();
     }
 }

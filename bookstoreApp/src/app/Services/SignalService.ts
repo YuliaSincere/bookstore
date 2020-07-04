@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Guid } from "guid-typescript";
+import { OnUpdateCartArgs } from './OnUpdateCartArgs';
 
 
 @Injectable({
@@ -12,11 +13,11 @@ import { Guid } from "guid-typescript";
 export class SignalService {
 
     private readonly onUpdateBookstore: Subject<any>;
-    private readonly onUpdateCart: Subject<Guid>;
+    private readonly onUpdateCart: Subject<OnUpdateCartArgs>;
 
     constructor() {
         this.onUpdateBookstore = new Subject<any>();
-        this.onUpdateCart = new Subject<Guid>();
+        this.onUpdateCart = new Subject<OnUpdateCartArgs>();
 
         let connectionUrl = "";
         if (!environment.production)
@@ -34,8 +35,9 @@ export class SignalService {
         connection.on("SendUpdateBookstore", () => {
             this.onUpdateBookstore.next();
         });
-        connection.on("SendUpdateCart", (customerId: string) => {
-            this.onUpdateCart.next(Guid.parse(customerId.toUpperCase()));
+        connection.on("SendUpdateCart", (customerId: string, allowToCheckout: boolean) => {
+            var guidCustomerId = Guid.parse(customerId.toUpperCase());
+            this.onUpdateCart.next({allowToCheckout: allowToCheckout , customerId: guidCustomerId});
         });
         connection.start().catch(err => document.write(err));
 
@@ -43,7 +45,7 @@ export class SignalService {
     get onUpdateBookstore$(): Observable<any> {
         return this.onUpdateBookstore.asObservable();
     }
-    get onUpdateCart$(): Observable<Guid> {
+    get onUpdateCart$(): Observable<OnUpdateCartArgs> {
         return this.onUpdateCart.asObservable();
     }
 }

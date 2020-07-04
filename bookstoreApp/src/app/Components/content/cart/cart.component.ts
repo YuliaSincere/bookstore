@@ -17,7 +17,7 @@ import { CustomerService } from 'src/app/Services/CustomerService';
 export class CartComponent implements OnInit, OnDestroy {
 
     private onUpdateCartSubscription: Subscription;
-
+    public allowToCheckout: boolean;
     public booksInCart: BookInCart[];
 
     constructor(private cartService: CartService, private signalService: SignalService, private customerService: CustomerService) {
@@ -25,9 +25,10 @@ export class CartComponent implements OnInit, OnDestroy {
         this.signalService = signalService;
         this.customerService = customerService;
 
-        this.onUpdateCartSubscription = this.signalService.onUpdateCart$.subscribe(customerId => {
-            if (customerId.equals(this.customerService.customerId)) 
+        this.onUpdateCartSubscription = this.signalService.onUpdateCart$.subscribe(args => {
+            if (args.customerId.equals(this.customerService.customerId)) 
             {
+                this.allowToCheckout = args.allowToCheckout;
                 this.getBookInCart(this.customerService.customerId);
             }
         })

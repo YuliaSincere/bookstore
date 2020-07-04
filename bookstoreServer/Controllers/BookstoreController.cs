@@ -16,10 +16,12 @@ namespace bookstoreApp.Controllers
     [ApiController]
     public class BookstoreController : Controller
     {
+        private const int checkoutSum = 2000;
         private object _lockStoreTable = new object();
 
         private readonly BookstoreDbContext _context;
         private readonly IHubContext<BookstoreHub, IBookStoreHub> _hubContext;
+
 
         public BookstoreController(
             BookstoreDbContext context,
@@ -94,11 +96,8 @@ namespace bookstoreApp.Controllers
                     storeItem.Count--;
                     _context.SaveChanges();
                 }
-
                 _context.SaveChanges();
-
-                _hubContext.Clients.All.SendUpdateCart(newCustomerId);
-                _hubContext.Clients.All.SendUpdateBookstore();
+                UpdateCart(newCustomerId);
             }
             return true;
         }
@@ -127,24 +126,16 @@ namespace bookstoreApp.Controllers
                         .SingleOrDefault(s => s.BookId == addBookDto.BookId);
                     if (storeItem == null)
                     {
-                        storeItem = new Store { BookId = addBookDto.BookId, Count = 1};
+                        storeItem = new Store { BookId = addBookDto.BookId, Count = 1 };
                         _context.Add(storeItem);
                     }
-                    else 
+                    else
                     {
                         storeItem.Count++;
                     }
-
                     _context.SaveChanges();
-
                 }
-                var puk = _context.Stores
-
-                        .Include(s => s.Book)
-                        .OrderBy(s => s.BookId)
-                        .Select(s => ConvertToDto(s)).ToList();
-                _hubContext.Clients.All.SendUpdateCart(newCustomerId);
-                _hubContext.Clients.All.SendUpdateBookstore();
+                UpdateCart(newCustomerId);
             }
             return true;
         }
@@ -174,6 +165,18 @@ namespace bookstoreApp.Controllers
             result.BookCount = c.BookCount;
 
             return result;
+        }
+
+        private void UpdateCart(Guid customerId)
+        {
+            var sum = _context.Cart
+                .Where(c => c.CustomerId == customerId)
+                .Select(c => c.Book.Price)
+                .Sum();
+
+            bool allowToCheckout = (sum >= checkoutSum);
+            _hubContext.Clients.All.SendUpdateCart(customerId, allowToCheckout);
+            _hubContext.Clients.All.SendUpdateBookstore();
         }
     }
 }
