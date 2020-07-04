@@ -1,9 +1,9 @@
 <div class="container">
-    <div class="name">{{bookInCart.name}}</div>
-    <div class="price">{{bookInCart.price}} руб.</div>
     <div class="count">{{bookInCart.bookCount}}</div>
+    <div class="name">{{bookInCart.name}}</div>
+    <div class="price">{{bookInCart.price}}<br> руб.</div>
+
     <div class="buttonNotBuy">
-        <!--TODO: передать параметры кнопке (click)="onClickEnter()" -->
-        <button mat-raised-button class="buttonNotGet">Отмена</button>
+        <app-buttonNotBuy [book]="bookInCart"></app-buttonNotBuy>
     </div>
 </div>

@@ -102,6 +102,44 @@ namespace bookstoreApp.Controllers
             return true;
         }
 
+        [Route("cart/remove")]
+        [HttpPost]
+        public bool removeBookFromCart(AddBookDto addBookDto)
+        {
+            if (!_context.Books.Any(book => book.Id == addBookDto.BookId))
+            {
+                return false;
+            }
+            Guid newCustomerId = Guid.Parse(addBookDto.CustomerId);
+            var cartItem = _context.Cart
+                .SingleOrDefault(c => c.BookId == addBookDto.BookId
+                 && c.CustomerId == newCustomerId);
+
+            if (cartItem.BookCount == 1) 
+            {
+             _context.Cart.Remove(cartItem);
+
+            lock (_lockStoreTable)
+            {
+                var storeItem = _context.Stores
+                    .SingleOrDefault(s => s.BookId == addBookDto.BookId && s.Count > 0);
+                if (storeItem == null)
+                {
+                    return false;
+                }
+                storeItem.Count++;
+                _context.SaveChanges();
+            }
+            
+            _context.SaveChanges();
+
+            _hubContext.Clients.All.SendUpdateCart(newCustomerId);
+            _hubContext.Clients.All.SendUpdateBookstore();
+            }
+            return true;
+        }
+
+
         [Route("cart")]
         [HttpGet]
         public IEnumerable<CartDto> GetCart(Guid customerId)
@@ -118,11 +156,11 @@ namespace bookstoreApp.Controllers
         {
             var result = new CartDto();
 
+            result.BookId = c.BookId;
             result.Name = c.Book.Name;
             result.CustomerId = c.CustomerId;
             result.Description = c.Book.Description;
             result.Price = c.Book.Price;
-
             result.BookCount = c.BookCount;
 
             return result;

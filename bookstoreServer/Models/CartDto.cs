@@ -25,5 +25,7 @@ public class CartDto
     /// Число экземпляров конкретной книги.
     /// </summary>
     public int BookCount { get; set; }
+
+    public int BookId { get; set; }
 }
 

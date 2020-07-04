@@ -23,6 +23,7 @@ import { CartService } from './Services/CartService';
 import { AuthorizationComponent } from './Authorization/authorization.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerService } from './Services/CustomerService';
+import { ButtonNotBuyComponent } from './Components/buttonNotBuy/buttonNotBuy.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CustomerService } from './Services/CustomerService';
     UserplaceComponent,
     BookInCartComponent,
     BuyButtonComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
+    ButtonNotBuyComponent
   ],
   imports: [
     BrowserModule,

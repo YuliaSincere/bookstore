@@ -12,6 +12,7 @@ import { CustomerService } from './CustomerService';
 export class CartService {
     private booksInCartUrl = 'api/cart'; //url to web api
     private addBookToCartUrl = 'api/cart/add'; //url to web api
+    private removeBookFromCartUrl = 'api/cart/remove'; //url to web api
 
     constructor(private http: HttpClient, private customerService: CustomerService) {
         this.customerService = customerService;
@@ -26,12 +27,19 @@ export class CartService {
      * Добавление книги в корзину.
      */
     addBookToCart(bookId: number): Promise<boolean> {
-        console.log(bookId);
-        // TODO: customerId: customerId после получения.
-
         const data = { bookId: bookId, customerId: this.customerService.customerId.toString()};
         return this.http
             .post<boolean>(this.addBookToCartUrl, data)
+            .toPromise();
+    }
+
+    /**
+     * Отмена добавления книги в корзину.
+     */
+    removeBookFromCart(bookId: number): Promise<boolean> {
+        const data = { bookId: bookId, customerId: this.customerService.customerId.toString()};
+        return this.http
+            .post<boolean>(this.removeBookFromCartUrl, data)
             .toPromise();
     }
 }

@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Injectable } from '@angular/core'
 import { BookProvider } from '../../../Services/BookProvider';
 import { Book } from '../../../Models/book';
 import * as signalR from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
 import { SignalService } from 'src/app/Services/SignalService';
+import { HttpClient } from '@angular/common/http';
+import { CustomerService } from 'src/app/Services/CustomerService';
 
 @Component({
     selector: 'app-bookstore',
@@ -11,15 +13,21 @@ import { SignalService } from 'src/app/Services/SignalService';
     styleUrls: ['./bookstore.component.scss']
 })
 
-export class BookstoreComponent implements OnInit,  OnDestroy {
+@Injectable({
+    providedIn: 'root',
+})
 
+export class BookstoreComponent implements OnInit,  OnDestroy {
+    private removeBookFrom = 'api/cart/add'; //url to web api
     private onUpdateBookstoreSubscription: Subscription;
 
     public books: Book[];
 
-    constructor(private bookProvider: BookProvider, private signalService: SignalService) {
+    constructor(private bookProvider: BookProvider, private signalService: SignalService,
+        private http: HttpClient, private customerService: CustomerService) {
         this.bookProvider = bookProvider;
         this.signalService = signalService;
+        this.customerService = customerService;
 
         this.onUpdateBookstoreSubscription = this.signalService.onUpdateBookstore$.subscribe(any => {
             this.getBooks();

@@ -1,25 +1,65 @@
-    // color palette
-    $p1:#f4f6ff;
-    $p2:#ffcb74;
-    $p3:#ea907a;
-    $p4:#4f8a8b;
-    //other
-    .container {
-        height: 200px;
-        width: 300px;
-        background-color: $p1;
-        border-radius: 2px;
-        z-index: 1;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        box-shadow: 3px 4px 4px black;
-        color: black;
-        margin: 10px;
-    }
-    
-    .buttonNotGet {
-        background-color: $p3;
-        font-size: 24px;
-        width: auto;
-        height: 45px;
-        margin-left: 22px;
-    }
+     // color palette
+     $p1:#f4f6ff;
+     $p2:#ffcb74;
+     $p3:#ea907a;
+     $p4:#4f8a8b;
+     .container {
+         height: 300px;
+         width: 200px;
+         background-color: $p4;
+         border-radius: 10px;
+         z-index: 1;
+         padding-top: 10px;
+         font-family: Verdana, Geneva, Tahoma, sans-serif;
+         box-shadow: 3px 4px 4px black;
+         margin: 20px;
+     }
+     
+     .buttonNotBuy {
+         margin-top: -60px;
+         margin-left: 30px;
+         height: 50px;
+         width: 50px;
+     }
+     
+     .name {
+         font-size: 20px;
+         margin-top: -20px;
+         margin-right: 10px;
+         color: $p2;
+         font-weight: bold;
+     }
+     
+     .price {
+         box-shadow: 3px 4px 4px black;
+         margin-top: 200px;
+         margin-left: -30px;
+         background-color: $p1;
+         width: 70px;
+         height: 70px;
+         color: black;
+         border-radius: 10px;
+         font-size: 20px;
+         font-weight: bold;
+         -moz-border-radius: 50px;
+         -webkit-border-radius: 50px;
+         border-radius: 50px;
+         text-align: center;
+         padding-top: 5px;
+     }
+     
+     .count {
+         width: 50px;
+         height: 50px;
+         background-color: $p3;
+         -moz-border-radius: 50px;
+         -webkit-border-radius: 50px;
+         border-radius: 50px;
+         box-shadow: 3px 4px 4px black;
+         font-size: 25px;
+         margin-top: -30px;
+         margin-left: 150px;
+         text-align: center;
+         padding-top: 5px;
+         color: $p1;
+     }
