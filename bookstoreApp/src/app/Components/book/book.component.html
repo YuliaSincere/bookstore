@@ -4,7 +4,7 @@
     <div class="name">{{book.name}}</div>
     <div class="price">{{book.price}}<br> руб.</div>
 
-    <div class="buttonBuy">
+    <div *ngIf="book.count>0" class="buttonBuy">
         <app-buyButton [book]="book"></app-buyButton>
     </div>
 </div>

@@ -3,10 +3,11 @@
 --'{E9B31B12-AC7D-4ABC-AB53-7BB84B1C34FF}', 2, 568685);
 --select * from "Cart" c
 --order by "BookId";
-select * from "Stores" c; 
+--select * from "Stores" c; 
 --select * from "Books" c;
 --delete from "Cart";
---delete from "Books";
+----delete from "Books";
+--delete from "Stores";
 --insert into "Books" ("Name", "Description", "Price")
 --values ('Мёртвые души', 'Про мёртвые души', 350),
 --('Собачье сердце', 'Про собачье сердце',500 ),
@@ -20,10 +21,10 @@ select * from "Stores" c;
 --('Герой нашего времени', 'Про героя нашего времени', 380),
 --('Война и мир', 'Про войну и мир', 670);
 --insert into "Stores" ("BookId", "Count")
---  values (24, 123),(25,567),(26,678),(27, 342),(28, 723),(29, 265),
+--  values (24, 2),(25,567),(26,678),(27, 342),(28, 723),(29, 265),
 --  (30, 623),(31,456),(32,396),(33,284),(34,583);
 
 
  
 --SELECT * FROM "Books" b;
---Select * from "Stores" s;
+Select * from "Stores" s;

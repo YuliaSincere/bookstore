@@ -38,11 +38,12 @@ namespace bookstoreApp.Controllers
         {
             lock (_lockStoreTable)
             {
-                return _context.Stores
+                var puk = _context.Stores
+
                     .Include(s => s.Book)
                     .OrderBy(s => s.BookId)
                     .Select(s => ConvertToDto(s)).ToList();
-
+                return puk;
             }
         }
 
@@ -78,26 +79,26 @@ namespace bookstoreApp.Controllers
                 cartItem = new Cart { BookId = addBookDto.BookId, CustomerId = newCustomerId, BookCount = 0 };
                 _context.Add(cartItem);
             }
-            if (cartItem.BookCount < 1) 
+            if (cartItem.BookCount < 1)
             {
-            cartItem.BookCount++;
+                cartItem.BookCount++;
 
-            lock (_lockStoreTable)
-            {
-                var storeItem = _context.Stores
-                    .SingleOrDefault(s => s.BookId == addBookDto.BookId && s.Count > 0);
-                if (storeItem == null)
+                lock (_lockStoreTable)
                 {
-                    return false;
+                    var storeItem = _context.Stores
+                        .SingleOrDefault(s => s.BookId == addBookDto.BookId && s.Count > 0);
+                    if (storeItem == null)
+                    {
+                        return false;
+                    }
+                    storeItem.Count--;
+                    _context.SaveChanges();
                 }
-                storeItem.Count--;
-                _context.SaveChanges();
-            }
-            
-            _context.SaveChanges();
 
-            _hubContext.Clients.All.SendUpdateCart(newCustomerId);
-            _hubContext.Clients.All.SendUpdateBookstore();
+                _context.SaveChanges();
+
+                _hubContext.Clients.All.SendUpdateCart(newCustomerId);
+                _hubContext.Clients.All.SendUpdateBookstore();
             }
             return true;
         }
@@ -115,26 +116,35 @@ namespace bookstoreApp.Controllers
                 .SingleOrDefault(c => c.BookId == addBookDto.BookId
                  && c.CustomerId == newCustomerId);
 
-            if (cartItem.BookCount == 1) 
+            if (cartItem.BookCount == 1)
             {
-             _context.Cart.Remove(cartItem);
-
-            lock (_lockStoreTable)
-            {
-                var storeItem = _context.Stores
-                    .SingleOrDefault(s => s.BookId == addBookDto.BookId && s.Count > 0);
-                if (storeItem == null)
-                {
-                    return false;
-                }
-                storeItem.Count++;
+                _context.Cart.Remove(cartItem);
                 _context.SaveChanges();
-            }
-            
-            _context.SaveChanges();
 
-            _hubContext.Clients.All.SendUpdateCart(newCustomerId);
-            _hubContext.Clients.All.SendUpdateBookstore();
+                lock (_lockStoreTable)
+                {
+                    var storeItem = _context.Stores
+                        .SingleOrDefault(s => s.BookId == addBookDto.BookId);
+                    if (storeItem == null)
+                    {
+                        storeItem = new Store { BookId = addBookDto.BookId, Count = 1};
+                        _context.Add(storeItem);
+                    }
+                    else 
+                    {
+                        storeItem.Count++;
+                    }
+
+                    _context.SaveChanges();
+
+                }
+                var puk = _context.Stores
+
+                        .Include(s => s.Book)
+                        .OrderBy(s => s.BookId)
+                        .Select(s => ConvertToDto(s)).ToList();
+                _hubContext.Clients.All.SendUpdateCart(newCustomerId);
+                _hubContext.Clients.All.SendUpdateBookstore();
             }
             return true;
         }
