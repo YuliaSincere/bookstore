@@ -23,7 +23,7 @@ export class CustomerService {
      */
     public set customerId(customerId: Guid) {
         this._customerId = customerId;
-        localStorage.setItem(customerIdLocalStorageKey, this.customerId.toString());
+        sessionStorage.setItem(customerIdLocalStorageKey, this.customerId.toString());
     }
 
     /**
@@ -35,7 +35,7 @@ export class CustomerService {
     }
 
     readCustomerIdFromStorage(): void {
-        const storedCustomerId = localStorage.getItem(customerIdLocalStorageKey);
+        const storedCustomerId = sessionStorage.getItem(customerIdLocalStorageKey);
         console.log(storedCustomerId);
         if (Guid.isGuid(storedCustomerId))
         {
