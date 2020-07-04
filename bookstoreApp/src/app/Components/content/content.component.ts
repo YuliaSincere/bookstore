@@ -9,15 +9,16 @@ import { Router } from '@angular/router';
 })
 
 export class ContentComponent implements OnInit {
-    constructor (private router: Router, private customerService: CustomerService) {
+    constructor(private router: Router, private customerService: CustomerService) {
 
         this.customerService = customerService;
     }
     ngOnInit(): void {
-        if ((this.customerService.customerId === null) 
-        || ( typeof this.customerService.customerId === 'undefined'))
-        {
-            this.router.navigateByUrl('/');
+        if (!this.customerService.isCustomerIdExists) {
+            this.customerService.readCustomerIdFromStorage();
+            if (!this.customerService.isCustomerIdExists) {
+                this.router.navigateByUrl('/');
+            }
         }
     }
 }

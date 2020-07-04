@@ -21,9 +21,8 @@ export class AuthorizationComponent {
             .replace("}", "");
 
         const g1 = Guid.parse(guidString);
-        this.router.navigateByUrl('/bookstore');
-
         this.customerService.customerId = g1;
+        this.router.navigateByUrl('/bookstore');
     }
 
     async onClickGet() {
