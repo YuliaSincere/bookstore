@@ -172,7 +172,6 @@ namespace bookstoreApp.Controllers
         [HttpPost]
         public bool CheckoutOrder(string customerId)
         {
-
             Guid orderCustomerId = Guid.Parse(customerId);
             var orderCartItems = _context.Cart
                 .Where(cartItem => cartItem.CustomerId == orderCustomerId)

@@ -1,9 +1,10 @@
 import { BookInCart } from '../Models/bookInCart'
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Guid } from "guid-typescript";
 import { CustomerService } from './CustomerService';
+import { BookInOrder } from '../Models/bookInOrder';
 
 @Injectable({
     providedIn: 'root',
@@ -11,23 +12,30 @@ import { CustomerService } from './CustomerService';
 // подучение данных с сервера
 export class CartService {
     private booksInCartUrl = 'api/cart'; //url to web api
+    private booksInOrderUrl = 'api/order'; //url to web api
     private addBookToCartUrl = 'api/cart/add'; //url to web api
     private removeBookFromCartUrl = 'api/cart/remove'; //url to web api
+    private checkoutBooksFromCartUrl = 'api/checkout'; //url to web api
 
     constructor(private http: HttpClient, private customerService: CustomerService) {
         this.customerService = customerService;
-     }
+    }
 
     async getBooksInCart(customerId: Guid): Promise<BookInCart[]> {
         const params = new HttpParams().set('customerId', customerId.toString());
-        return this.http.get<BookInCart[]>(this.booksInCartUrl,{params: params}).toPromise();
+        return this.http.get<BookInCart[]>(this.booksInCartUrl, { params: params }).toPromise();
+    }
+
+    async getBooksInOrder(customerId: Guid): Promise<BookInOrder[]> {
+        const params = new HttpParams().set('customerId', customerId.toString());
+        return this.http.get<BookInOrder[]>(this.booksInOrderUrl, { params: params }).toPromise();
     }
 
     /**
      * Добавление книги в корзину.
      */
     addBookToCart(bookId: number): Promise<boolean> {
-        const data = { bookId: bookId, customerId: this.customerService.customerId.toString()};
+        const data = { bookId: bookId, customerId: this.customerService.customerId.toString() };
         return this.http
             .post<boolean>(this.addBookToCartUrl, data)
             .toPromise();
@@ -37,9 +45,38 @@ export class CartService {
      * Отмена добавления книги в корзину.
      */
     removeBookFromCart(bookId: number): Promise<boolean> {
-        const data = { bookId: bookId, customerId: this.customerService.customerId.toString()};
+        const data = { bookId: bookId, customerId: this.customerService.customerId.toString() };
         return this.http
             .post<boolean>(this.removeBookFromCartUrl, data)
             .toPromise();
+    }
+
+    /**
+     * Чекаут по корзине.
+     */
+    checkoutBooksFromCart(): Promise<boolean> {
+        const data = { customerId: this.customerService.customerId.toString() };
+
+        return this.http
+            .post<boolean>(
+                this.checkoutBooksFromCartUrl,
+                null,
+                {
+                    params: {
+                        customerId: this.customerService.customerId.toString()
+                    }
+                })
+            .toPromise();
+
+        // return this.http
+        //     .post<boolean>(
+        //         this.checkoutBooksFromCartUrl,
+        //         `\"${this.customerService.customerId.toString()}\"`,
+        //         {
+        //             headers: new HttpHeaders({
+        //                 'Content-Type': 'application/json'
+        //             })
+        //         })
+        //     .toPromise();
     }
 }
