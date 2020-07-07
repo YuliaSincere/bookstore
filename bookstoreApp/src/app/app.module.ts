@@ -25,6 +25,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerService } from './Services/CustomerService';
 import { ButtonNotBuyComponent } from './Components/buttonNotBuy/buttonNotBuy.component';
 import { CheckoutButtonnComponent } from './Components/checkoutButton/checkoutButton.component';
+import { OrderComponent } from './Components/order/order.component';
+import { BookInOrderComponent } from './Components/bookInOrder/bookInOrder.component';
+import { CheckoutComponent } from './Components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { CheckoutButtonnComponent } from './Components/checkoutButton/checkoutBu
     BuyButtonComponent,
     AuthorizationComponent,
     ButtonNotBuyComponent,
-    CheckoutButtonnComponent
+    CheckoutButtonnComponent,
+    OrderComponent,
+    BookInOrderComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

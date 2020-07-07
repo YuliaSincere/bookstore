@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 
 import { Guid } from "guid-typescript";
 import { OnUpdateCartArgs } from './OnUpdateCartArgs';
+import { OnUpdateOrderArgs } from './OnUpdateOrderArgs';
 
 
 @Injectable({
@@ -14,10 +15,12 @@ export class SignalService {
 
     private readonly onUpdateBookstore: Subject<any>;
     private readonly onUpdateCart: Subject<OnUpdateCartArgs>;
+    private readonly onUpdateOrder: Subject<OnUpdateOrderArgs>;
 
     constructor() {
         this.onUpdateBookstore = new Subject<any>();
         this.onUpdateCart = new Subject<OnUpdateCartArgs>();
+        this.onUpdateOrder = new Subject<OnUpdateOrderArgs>();
 
         let connectionUrl = "";
         if (!environment.production)
@@ -39,6 +42,10 @@ export class SignalService {
             var guidCustomerId = Guid.parse(customerId.toUpperCase());
             this.onUpdateCart.next({allowToCheckout: allowToCheckout , customerId: guidCustomerId});
         });
+        connection.on("SendUpdateOrder", (customerId: string) => {
+            var guidCustomerId = Guid.parse(customerId.toUpperCase());
+            this.onUpdateOrder.next({customerId: guidCustomerId});
+        });
         connection.start().catch(err => document.write(err));
 
     }
@@ -47,5 +54,8 @@ export class SignalService {
     }
     get onUpdateCart$(): Observable<OnUpdateCartArgs> {
         return this.onUpdateCart.asObservable();
+    }
+    get onUpdateOrder$(): Observable<OnUpdateOrderArgs> {
+        return this.onUpdateOrder.asObservable();
     }
 }

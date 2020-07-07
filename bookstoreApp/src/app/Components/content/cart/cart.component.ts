@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { Guid } from "guid-typescript";
 import { CustomerService } from 'src/app/Services/CustomerService';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cart',
@@ -20,7 +21,7 @@ export class CartComponent implements OnInit, OnDestroy {
     public allowToCheckout: boolean;
     public booksInCart: BookInCart[];
 
-    constructor(private cartService: CartService, private signalService: SignalService, private customerService: CustomerService) {
+    constructor(private router: Router, private cartService: CartService, private signalService: SignalService, private customerService: CustomerService) {
         this.cartService = cartService;
         this.signalService = signalService;
         this.customerService = customerService;
@@ -40,6 +41,11 @@ export class CartComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {-
         this.getBookInCart(this.customerService.customerId);
+    }
+
+    async onClick() {
+        await this.cartService.checkoutBooksFromCart();
+        this.router.navigateByUrl('/checkout');
     }
 
     /**
