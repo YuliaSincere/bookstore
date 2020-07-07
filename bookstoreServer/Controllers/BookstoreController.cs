@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace bookstoreApp.Controllers
 {
@@ -47,6 +47,34 @@ namespace bookstoreApp.Controllers
                     .Select(s => ConvertToDto(s)).ToList();
                 return puk;
             }
+        }
+
+        [Route("order")]
+        [HttpGet]
+        public IEnumerable<OrderDto> GetOrderDto(Guid customerId) 
+        {
+            lock (_lockStoreTable)
+            {
+                return _context.Orders
+                .Where(o => o.CustomerId == customerId) //Фильтр по кастомер айди
+                .Include(o => o.Book)
+                .OrderBy(s => s.BookId)
+                .Select(o => ConvertToDto(o))
+                .ToList();
+            }
+        }
+
+        static private OrderDto ConvertToDto(Order o)
+        {
+            var result = new OrderDto();
+
+            result.Name = o.Book.Name;
+            result.Price = o.Book.Price;
+            result.BookCount = o.BookCount;
+            result.BookId = o.BookId;
+            result.CustomerId = o.CustomerId;
+
+            return result;
         }
 
         static private BookDto ConvertToDto(Store s)
@@ -104,7 +132,7 @@ namespace bookstoreApp.Controllers
 
         [Route("cart/remove")]
         [HttpPost]
-        public bool removeBookFromCart(AddBookDto addBookDto)
+        public bool RemoveBookFromCart(AddBookDto addBookDto)
         {
             if (!_context.Books.Any(book => book.Id == addBookDto.BookId))
             {
@@ -137,6 +165,37 @@ namespace bookstoreApp.Controllers
                 }
                 UpdateCart(newCustomerId);
             }
+            return true;
+        }
+
+        [Route("checkout")]
+        [HttpPost]
+        public bool CheckoutOrder(string customerId)
+        {
+
+            Guid orderCustomerId = Guid.Parse(customerId);
+            var orderCartItems = _context.Cart
+                .Where(cartItem => cartItem.CustomerId == orderCustomerId)
+                .ToArray();
+            foreach (var cartItem in orderCartItems)
+            {
+                var order = new Order
+                {
+                    CustomerId = orderCustomerId,
+                    BookId = cartItem.BookId,
+                    BookCount = cartItem.BookCount
+                };
+                _context.Add(order);
+            }
+            _context.RemoveRange(orderCartItems);
+            _context.SaveChanges();
+
+            // Создание фоновой задачи, которая имитирует задержку в оформлении заказа.
+            Task.Factory.StartNew( async () => 
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5));
+                    await _hubContext.Clients.All.SendOrderReady(orderCustomerId);
+                });
             return true;
         }
 

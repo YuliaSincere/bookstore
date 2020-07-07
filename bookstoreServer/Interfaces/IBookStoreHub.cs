@@ -15,5 +15,6 @@ namespace bookstoreServer.Interfaces
         /// <returns></returns>
          Task SendUpdateCart(Guid CustomerId, bool allowToCheckout);
          Task SendUpdateBookstore();
+         Task SendOrderReady(Guid customerId);
     }
 }
