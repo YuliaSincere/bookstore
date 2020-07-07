@@ -6,10 +6,10 @@
 --select * from "Stores" c; 
 --select * from "Books" c;
 --delete from "Cart";
-----delete from "Books";
+--delete from "Books";
 --delete from "Stores";
 --insert into "Books" ("Name", "Description", "Price")
---values ('Мёртвые души', 'Про мёртвые души', 350),
+--values ('Мёртвые души', 'Про мёртвые души', 2000),
 --('Собачье сердце', 'Про собачье сердце',500 ),
 --('Капитанская дочка', 'Про капитанскую дочку', 670),
 --('Гамлет', 'Про Гамлета', 450),
@@ -21,8 +21,8 @@
 --('Герой нашего времени', 'Про героя нашего времени', 380),
 --('Война и мир', 'Про войну и мир', 670);
 --insert into "Stores" ("BookId", "Count")
---  values (24, 2),(25,567),(26,678),(27, 342),(28, 723),(29, 265),
---  (30, 623),(31,456),(32,396),(33,284),(34,583);
+--  values (35, 2000),(36,567),(37,678),(38, 342),(39, 723),(40, 265),
+--  (41, 623),(42,456),(43,396),(44,284),(45,583);
 --insert into "Orders" ("BookId", "BookCount", "CustomerId")
 -- values (24,1,'{2F1ED032-D387-4B8F-97A0-78CC118C295B}'), 
 -- (25,1,'{05880BA6-88F1-4DA0-8F64-56C1D2C6CBC7}'), 
@@ -32,4 +32,7 @@
 
  
 --SELECT * FROM "Books" b;
-Select * from "Stores" s;
+--Select * from "Stores" s;
+--Select * from "Orders" o
+--order by "CustomerId";
+--delete from "Orders";

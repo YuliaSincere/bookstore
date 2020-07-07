@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { SignalService } from 'src/app/Services/SignalService';
-import { CartService } from 'src/app/Services/CartService';
-import { CustomerService } from 'src/app/Services/CustomerService';
+import { Component, OnInit } from '@angular/core';
 import { BookInOrder } from 'src/app/Models/bookInOrder';
 import { Guid } from 'guid-typescript';
+import { CartService } from 'src/app/Services/CartService';
+import { ActivatedRoute } from '@angular/router';
+import { GuidService } from 'src/app/Services/GuidService';
+
 
 @Component({
     selector: 'app-order',
@@ -12,42 +12,34 @@ import { Guid } from 'guid-typescript';
     styleUrls: ['./order.component.scss']
 })
 
-export class OrderComponent {
-    // private orderSubscription: Subscription;
+export class OrderComponent implements OnInit {
     public booksInOrder: BookInOrder[];
+    private orderId: string;
+    constructor(private route: ActivatedRoute, private cartService: CartService)
+    {
+        this.cartService = cartService;
+    }
+       /**
+     * Обновление заказа.
+     */
+    private async getBookInOrder(orderId: Guid) {
+        try {
+            this.booksInOrder = await this.cartService.getBooksInOrder(orderId);
 
-    // constructor(private cartService: CartService, private signalService: SignalService, private customerService: CustomerService) {
-    //     this.cartService = cartService;
-    //     this.signalService = signalService;
-    //     this.customerService = customerService;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-    //     this.orderSubscription = this.signalService.onUpdateOrder$.subscribe(args => {
-    //         if (args.customerId.equals(this.customerService.customerId)) 
-    //         {
-                
-    //             this.getBookInOrder(this.customerService.customerId);
-    //         }
-    //     })
-    // }
+    ngOnInit() {
+        this.route.queryParamMap.subscribe(param => {
+            const orderId = GuidService.toGuid(param.get("orderId"));
 
-    // ngOnDestroy(): void {
-    //     this.orderSubscription.unsubscribe();
-    // }
+            if (!orderId) {
+                return;
+            }
 
-    // ngOnInit(): void {-
-    //     this.getBookInOrder(this.customerService.customerId);
-    // }
-
-    // /**
-    //  * Обновление заказа.
-    //  */
-    // private async getBookInOrder(customerId: Guid) {
-    //     try {
-    //         this.booksInOrder = await this.cartService.getBooksInOrder(customerId);
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
+            this.getBookInOrder(orderId);
+        });
+      }
 }

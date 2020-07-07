@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Guid } from "guid-typescript";
 import { Router } from '@angular/router';
 import { CustomerService } from '../Services/CustomerService';
+import { GuidService } from '../Services/GuidService';
 
 @Component({
     selector: 'app-authorization',
@@ -15,13 +16,13 @@ export class AuthorizationComponent {
      }
     customerId: string;
     async onClickEnter() {
-        let guidString = this.customerId
-            .toUpperCase()
-            .replace("{", "")
-            .replace("}", "");
+        const guid = GuidService.toGuid(this.customerId);
 
-        const g1 = Guid.parse(guidString);
-        this.customerService.customerId = g1;
+        if (!guid) {
+            return;
+        }
+
+        this.customerService.customerId = guid;
         this.router.navigateByUrl('/bookstore');
     }
 

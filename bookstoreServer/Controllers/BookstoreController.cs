@@ -192,7 +192,7 @@ namespace bookstoreApp.Controllers
             // Создание фоновой задачи, которая имитирует задержку в оформлении заказа.
             Task.Factory.StartNew( async () => 
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(20));
+                    await Task.Delay(TimeSpan.FromSeconds(5));
                     await _hubContext.Clients.All.SendUpdateOrder(orderCustomerId);
                 });
             return true;
