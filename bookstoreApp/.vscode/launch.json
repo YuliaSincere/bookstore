@@ -8,8 +8,8 @@
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Client",
-            //"url": "http://localhost:4200",
-            "url": "http://localhost:4200/order?orderId=05880BA6-88F1-4DA0-8F64-56C1D2C6CBC7",
+            "url": "http://localhost:4200",
+            // "url": "http://localhost:4200/order?orderId=05880BA6-88F1-4DA0-8F64-56C1D2C6CBC7",
             "webRoot": "${workspaceFolder}"
         }
     ]

@@ -3,37 +3,69 @@
  $p2:#ffcb74;
  $p3:#ea907a;
  $p4:#4f8a8b;
+ $c1:#040a00;
+ $c2:#361e04;
+ $c3:#7b3804;
+ $c4:#c57129;
+ $c5:#151702;
+ $c6:#8b3301;
+ $c7:#2a3a09;
+ $c8:#261700;
+ $c9:#561102;
+ $c10:#a03002;
  //
  .enter {
-     padding: 0px;
-     margin: 0px;
+     margin-top: -5px;
      width: 100%;
      height: auto;
+     border-style: none;
  }
  
  .buttonEnter {
-     background-color: $p4;
+     background-color: $c7;
      font-size: 24px;
      width: auto;
      height: 50px;
+     margin-bottom: 20px;
+ }
+ 
+ .container {
+     align-content: center;
  }
  
  .buttonGet {
-     background-color: $p3;
+     background-color: $c9;
      font-size: 24px;
      width: auto;
      height: 50px;
-     margin-left: 22px;
  }
  
- .authorizationContainer {
+ .authorizationContainer1 {
      text-align: center;
-     background-color: $p1;
-     width: 300px;
-     height: 380px;
+     background-color: $c3;
+     width: max-content;
+     height: max-content;
      border-radius: 10px;
      box-shadow: 4px 4px 4px black;
+     margin-left: 40%;
      margin-top: 100px;
+     padding-top: 30px;
+     padding-bottom: 20px;
+     padding-right: 5px;
+     padding-left: 5px;
+     margin-bottom: 10px;
+     //  padding-right: 70px;
+     //  padding-left: 70px;
+ }
+ 
+ .authorizationContainer2 {
+     text-align: center;
+     background-color: $c3;
+     width: 310px;
+     height: max-content;
+     border-radius: 10px;
+     box-shadow: 4px 4px 4px black;
+     margin-top: 10px;
      margin-left: 40%;
      padding-top: 30px;
      padding-bottom: 20px;
@@ -42,30 +74,27 @@
  }
  
  .LabelPromo1 {
-     border: 1px solid red;
      text-align: center;
      font-size: 20px;
-     color: black;
      width: 300px;
      margin-bottom: 20px;
      margin-left: 0px;
+     color: white;
+     font-weight: bolder;
  }
  
  .LabelPromo2 {
+     font-weight: bolder;
      font-size: 20px;
-     color: black;
+     color: white;
      text-align: center;
      width: 300px;
      margin-bottom: 20px;
  }
  
  #promo {
-     font-size: 20px;
+     font-size: 17px;
      height: 40px;
-     color: black;
-     border-color: $p4;
-     border-width: 0.1px;
-     border-style: solid;
-     border-radius: 10px;
+     color: white;
      width: 100%;
  }

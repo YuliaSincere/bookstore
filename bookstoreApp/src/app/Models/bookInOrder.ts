@@ -4,5 +4,7 @@ export interface BookInOrder {
     description: string;
     price: number;
     bookCount: number;
+    image: string;
+    author: string;
 }
 

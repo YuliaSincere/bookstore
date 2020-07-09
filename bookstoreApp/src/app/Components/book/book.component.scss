@@ -1,65 +1,85 @@
-     // color palette
-     $p1:#f4f6ff;
-     $p2:#ffcb74;
-     $p3:#ea907a;
-     $p4:#4f8a8b;
-     .container {
-         height: 300px;
-         width: 200px;
-         background-color: $p4;
-         border-radius: 10px;
-         z-index: 1;
-         padding-top: 10px;
-         font-family: Verdana, Geneva, Tahoma, sans-serif;
-         box-shadow: 3px 4px 4px black;
-         margin: 20px;
-     }
-     
-     .buttonBuy {
-         margin-top: -60px;
-         margin-left: 30px;
-         height: 50px;
-         width: 50px;
-     }
-     
-     .name {
-         font-size: 20px;
-         margin-top: -20px;
-         margin-right: 10px;
-         color: $p2;
-         font-weight: bold;
-     }
-     
-     .price {
-         box-shadow: 3px 4px 4px black;
-         margin-top: 200px;
-         margin-left: -30px;
-         background-color: $p1;
-         width: 70px;
-         height: 70px;
-         color: black;
-         border-radius: 10px;
-         font-size: 20px;
-         font-weight: bold;
-         -moz-border-radius: 50px;
-         -webkit-border-radius: 50px;
-         border-radius: 50px;
-         text-align: center;
-         padding-top: 5px;
-     }
-     
-     .count {
-         width: 50px;
-         height: 50px;
-         background-color: $p3;
-         -moz-border-radius: 50px;
-         -webkit-border-radius: 50px;
-         border-radius: 50px;
-         box-shadow: 3px 4px 4px black;
-         font-size: 25px;
-         margin-top: -30px;
-         margin-left: 150px;
-         text-align: center;
-         padding-top: 5px;
-         color: $p1;
-     }
+    // color palette
+    $p1:#f4f6ff;
+    $p2:#ffcb74;
+    $p3:#ea907a;
+    $p4:#4f8a8b;
+    $c1:#040a00;
+    $c2:#361e04;
+    $c3:#7b3804;
+    $c4:#c57129;
+    $c5:#151702;
+    $c6:#8b3301;
+    $c7:#2a3a09;
+    $c8:#261700;
+    $c9:#561102;
+    $c10:#a03002;
+    .container {
+        height: 300px;
+        width: 200px;
+        background-color: $p4;
+        border-radius: 10px;
+        z-index: 1;
+        padding-top: 10px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        box-shadow: 3px 4px 4px black;
+        margin: 20px;
+    }
+    
+    .buttonBuy {
+        margin-top: -60px;
+        margin-left: 30px;
+        height: 50px;
+        width: 50px;
+    }
+    
+    .name {
+        font-size: 20px;
+        margin-top: -20px;
+        margin-right: 10px;
+        color: $p2;
+        font-weight: bold;
+        z-index: 3;
+    }
+    
+    .price {
+        box-shadow: 3px 4px 4px black;
+        margin-top: 200px;
+        margin-left: -30px;
+        background-color: $p1;
+        width: 70px;
+        height: 70px;
+        color: black;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        text-align: center;
+        padding-top: 5px;
+        z-index: 3;
+    }
+    
+    .count {
+        width: 50px;
+        height: 50px;
+        background-color: $p3;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        box-shadow: 3px 4px 4px black;
+        font-size: 25px;
+        margin-top: -30px;
+        margin-left: 150px;
+        text-align: center;
+        padding-top: 5px;
+        color: $p1;
+        z-index: 3;
+    }
+    
+    .image {
+        width: 10.5em;
+        height: 10.5em;
+        background-color: $c9;
+        z-index: 2;
+    }

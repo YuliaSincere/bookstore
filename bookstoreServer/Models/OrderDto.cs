@@ -10,7 +10,7 @@ public class OrderDto
     /// Название книги.
     /// </summary>
     public string Name { get; set; }
-    
+
     /// <summary>
     /// Стоимость книги.
     /// </summary>
@@ -20,6 +20,15 @@ public class OrderDto
     /// Число экземпляров конкретной книги.
     /// </summary>
     public int BookCount { get; set; }
+    /// <summary>
+    /// Обложка.
+    /// </summary>
+    public string Image { get; set; }
+
+    /// <summary>
+    /// Автор.
+    /// </summary>
+    public string Author { get; set; }
 
     public int BookId { get; set; }
 }

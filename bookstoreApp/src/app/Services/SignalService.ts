@@ -25,7 +25,7 @@ export class SignalService {
         let connectionUrl = "";
         if (!environment.production)
         {
-            connectionUrl = environment.signalRServer;
+            connectionUrl = environment.serverUrl;
         }
 
         connectionUrl += "/hubs";

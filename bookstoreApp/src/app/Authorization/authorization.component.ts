@@ -27,7 +27,13 @@ export class AuthorizationComponent {
     }
 
     async onClickGet() {
-        this.customerService.customerId = Guid.create();
+        var testId = Guid.create();
+        var test = testId.toString();
+        const guid = GuidService.toGuid(test);
+        if (!guid) {
+            return;
+        }
+        this.customerService.customerId = guid;
         this.router.navigateByUrl('/bookstore');
     }
 }

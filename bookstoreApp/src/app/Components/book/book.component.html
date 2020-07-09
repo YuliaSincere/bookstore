@@ -2,6 +2,10 @@
 
     <div class="count">{{book.count}}</div>
     <div class="name">{{book.name}}</div>
+    <div class="author">{{book.author}}</div>
+    <div class="image">
+        <img class="imageImage" src="{{book.image}}">
+    </div>
     <div class="price">{{book.price}}<br> руб.</div>
 
     <div *ngIf="book.count>0" class="buttonBuy">

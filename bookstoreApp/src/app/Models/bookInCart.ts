@@ -4,5 +4,7 @@ export interface BookInCart {
     description: string;
     price: number;
     bookCount: number;
+    image: string;
+    author: string;
 }
 

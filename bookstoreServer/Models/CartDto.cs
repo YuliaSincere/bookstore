@@ -25,6 +25,15 @@ public class CartDto
     /// Число экземпляров конкретной книги.
     /// </summary>
     public int BookCount { get; set; }
+    /// <summary>
+    /// Обложка.
+    /// </summary>
+    public string Image { get; set; }
+
+    /// <summary>
+    /// Автор.
+    /// </summary>
+    public string Author { get; set; }
 
     public int BookId { get; set; }
 }

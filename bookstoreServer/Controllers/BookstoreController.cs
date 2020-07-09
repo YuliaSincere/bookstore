@@ -86,6 +86,8 @@ namespace bookstoreApp.Controllers
             result.Price = s.Book.Price;
             result.Description = s.Book.Description;
             result.Count = s.Count;
+            result.Author = s.Book.Author;
+            result.Image = s.Book.Image;
 
             return result;
         }
@@ -221,6 +223,8 @@ namespace bookstoreApp.Controllers
             result.Description = c.Book.Description;
             result.Price = c.Book.Price;
             result.BookCount = c.BookCount;
+            result.Author = c.Book.Author;
+            result.Image = c.Book.Image;
 
             return result;
         }

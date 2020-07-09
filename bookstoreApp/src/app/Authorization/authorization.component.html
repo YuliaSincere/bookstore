@@ -1,7 +1,7 @@
-<div class="authorizationContainer" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+<div class="authorizationContainer1" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
     <!--Форма для ввода промокода (авторизация)-->
     <div class="EnterPromo">
-        <div class="LabelPromo1">Войти, используя промокод</div>
+        <div class="LabelPromo1">Войти,<br> используя промокод</div>
         <mat-form-field appearance="outline" class="enter">
             <input matInput id="promo" [(ngModel)]="customerId" required placeholder="Введите промокод" />
         </mat-form-field>
@@ -9,9 +9,10 @@
             <button mat-raised-button class="buttonEnter" (click)="onClickEnter()">Вход</button>
         </div>
     </div>
+</div>
 
-    <!--Форма для получения промокода-->
-
+<!--Форма для получения промокода-->
+<div class="authorizationContainer2" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
     <div class="GetPromo">
         <div class="LabelPromo2">Получить промокод</div>
         <div class="promoButtonGet">
