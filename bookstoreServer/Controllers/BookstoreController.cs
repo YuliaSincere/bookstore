@@ -203,19 +203,25 @@ namespace bookstoreApp.Controllers
 
         [Route("cart")]
         [HttpGet]
-        public IEnumerable<CartDto> GetCart(Guid customerId)
+        public CartDto GetCart(Guid customerId)
         {
-            return _context.Cart
+            var result = new CartDto();
+            result.BooksInCart = _context.Cart
                 .Where(c => c.CustomerId == customerId) //Фильтр по кастомер айди
                 .Include(c => c.Book)
                 .OrderBy(s => s.BookId)
                 .Select(c => ConvertToDto(c))
-                .ToList();
+                .ToArray();
+            var sum = result.BooksInCart
+                .Sum(c => c.Price);
+            result.AllowToCheckout = (sum >= checkoutSum);
+            return result;
+
         }
 
-        static private CartDto ConvertToDto(Cart c)
+        static private BookInCartDto ConvertToDto(Cart c)
         {
-            var result = new CartDto();
+            var result = new BookInCartDto();
 
             result.BookId = c.BookId;
             result.Name = c.Book.Name;

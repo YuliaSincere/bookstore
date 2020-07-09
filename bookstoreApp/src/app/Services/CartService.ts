@@ -1,4 +1,5 @@
 import { BookInCart } from '../Models/bookInCart'
+import { CartDto } from "../Models/CartDto";
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -21,9 +22,15 @@ export class CartService {
         this.customerService = customerService;
     }
 
-    async getBooksInCart(customerId: Guid): Promise<BookInCart[]> {
+    async getBooksInCart(customerId: Guid): Promise<CartDto> {
         const params = new HttpParams().set('customerId', customerId.toString());
-        return this.http.get<BookInCart[]>(this.booksInCartUrl, { params: params }).toPromise();
+        const cartDto = await this.http.get<CartDto>(this.booksInCartUrl, { params: params }).toPromise();
+       
+        for (let i=0; i<cartDto.booksInCart.length; i++) {
+            //TODO: "/assets/CoverImages/" придумать с этим ченить
+            cartDto.booksInCart[i].image = "/assets/CoverImages/" + cartDto.booksInCart[i].image; 
+        }
+        return Promise.resolve(cartDto);
     }
 
     async getBooksInOrder(customerId: Guid): Promise<BookInOrder[]> {

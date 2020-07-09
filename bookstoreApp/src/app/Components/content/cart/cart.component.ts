@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Guid } from "guid-typescript";
 import { CustomerService } from 'src/app/Services/CustomerService';
 import { Router } from '@angular/router';
+import { CartDto } from 'src/app/Models/CartDto';
 
 @Component({
     selector: 'app-cart',
@@ -16,7 +17,6 @@ import { Router } from '@angular/router';
 
 
 export class CartComponent implements OnInit, OnDestroy {
-
     private onUpdateCartSubscription: Subscription;
     public allowToCheckout: boolean;
     public booksInCart: BookInCart[];
@@ -53,7 +53,9 @@ export class CartComponent implements OnInit, OnDestroy {
      */
     private async getBookInCart(customerId: Guid) {
         try {
-            this.booksInCart = await this.cartService.getBooksInCart(customerId);
+            const cart = await this.cartService.getBooksInCart(customerId);
+            this.booksInCart = cart.booksInCart;
+            this.allowToCheckout = cart.allowToCheckout;
 
         } catch (error) {
             console.log(error);

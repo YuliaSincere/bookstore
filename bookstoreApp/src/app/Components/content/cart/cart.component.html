@@ -2,8 +2,10 @@
     <div *ngIf="allowToCheckout" (click)="onClick()" class=" buttonCheckout ">
         <app-checkoutButton></app-checkoutButton>
     </div>
-    <mat-grid-list class="container " cols="2 " rowHeight="2:1 " *ngFor="let bookInCart of booksInCart ">
-        <app-bookInCart [bookInCart]="bookInCart "></app-bookInCart>
+    <mat-grid-list class="container " cols="3" rowHeight="400px">
+        <mat-grid-tile *ngFor="let bookInCart of booksInCart ">
+            <app-bookInCart [bookInCart]="bookInCart "></app-bookInCart>
+        </mat-grid-tile>
     </mat-grid-list>
 
 </div>

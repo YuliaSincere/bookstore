@@ -1,40 +1,17 @@
-using System;
+
 /// <summary>
-/// Транспортный класс для передачи информации о книге в корзине для передачи на клиент.
+/// Транспортный класс корзины
 /// </summary>
-public class CartDto
+public class CartDto 
 {
-    public Guid CustomerId { get; set; }
-
     /// <summary>
-    /// Название книги.
+    /// Книги в корзине.
     /// </summary>
-    public string Name { get; set; }
-
+    public BookInCartDto[] BooksInCart { get; set;}
     /// <summary>
-    /// Описание книги.
+    ///Доступность оформления заказа.
     /// </summary>
-    public string Description { get; set; }
-
-    /// <summary>
-    /// Стоимость книги.
-    /// </summary>
-    public double Price { get; set; }
-
-    /// <summary>
-    /// Число экземпляров конкретной книги.
-    /// </summary>
-    public int BookCount { get; set; }
-    /// <summary>
-    /// Обложка.
-    /// </summary>
-    public string Image { get; set; }
-
-    /// <summary>
-    /// Автор.
-    /// </summary>
-    public string Author { get; set; }
-
-    public int BookId { get; set; }
+    /// <value></value>
+    public bool AllowToCheckout { get; set; }
 }
 

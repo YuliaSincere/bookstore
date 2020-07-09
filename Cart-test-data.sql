@@ -5,7 +5,7 @@
 --order by "CustomerId";
 --order by "BookId";
 --select * from "Stores" c; 
-select * from "Books" c;
+--select * from "Books" c;
 --delete from "Cart";
 --delete from "Books";
 --delete from "Stores";
@@ -27,7 +27,7 @@ select * from "Books" c;
 --('Однажды раз и навсегда','Про однажды раз и навсегда', 590, 'Валдонус', '15.jpg'),
 --('Хребты безумия','Про хребты безумия', 290, 'Тардендон', '16.jpg');
 --insert into "Stores" ("BookId", "Count")
---  values (46, 2000),(47,567),(48,678),(49, 342),(50, 723),(51, 265),(52, 470),(53, 486),
+--  values (46, 200),(47,567),(48,678),(49, 342),(50, 723),(51, 265),(52, 470),(53, 486),
 --  (54, 623),(55,456),(56,396),(57,284),(58,583),(59, 472),(60, 391),(61, 582);
 --insert into "Orders" ("BookId", "BookCount", "CustomerId")
 -- values (24,1,'{2F1ED032-D387-4B8F-97A0-78CC118C295B}'), 
