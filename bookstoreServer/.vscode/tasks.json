@@ -26,6 +26,18 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "ng serve",
+            "command": "ng",
+            "args":[
+                "serve"
+            ],
+            "type": "shell",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}/../bookstoreApp"
+            }
+        },
+        {
             "label": "watch",
             "command": "dotnet",
             "type": "process",

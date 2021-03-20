@@ -1,3 +1,6 @@
+
+
+
 --insert into "Cart" ("CustomerId","BookId", "BookCount" )
 --values ('{1C61F727-F1F1-412D-BEB8-638D460F09A5}', 1, 5805),
 --'{E9B31B12-AC7D-4ABC-AB53-7BB84B1C34FF}', 2, 568685);
@@ -26,9 +29,10 @@
 --('Сказки роботов','Про сказки роботов', 620, 'Тидодар', '14.jpg'),
 --('Однажды раз и навсегда','Про однажды раз и навсегда', 590, 'Валдонус', '15.jpg'),
 --('Хребты безумия','Про хребты безумия', 290, 'Тардендон', '16.jpg');
+
+--select * from "Books";
 --insert into "Stores" ("BookId", "Count")
---  values (46, 200),(47,567),(48,678),(49, 342),(50, 723),(51, 265),(52, 470),(53, 486),
---  (54, 623),(55,456),(56,396),(57,284),(58,583),(59, 472),(60, 391),(61, 582);
+--  values (21, 200),(22,567);
 --insert into "Orders" ("BookId", "BookCount", "CustomerId")
 -- values (24,1,'{2F1ED032-D387-4B8F-97A0-78CC118C295B}'), 
 -- (25,1,'{05880BA6-88F1-4DA0-8F64-56C1D2C6CBC7}'), 
@@ -38,7 +42,7 @@
 
  
 --SELECT * FROM "Books" b;
-Select * from "Stores" s;
+--Select * from "Stores" s;
 --Select * from "Orders" o
 --order by "CustomerId";
 --delete from "Orders";

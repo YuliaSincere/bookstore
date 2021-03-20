@@ -14,15 +14,19 @@
     $c8:#261700;
     $c9:#561102;
     $c10:#a03002;
+    $q1: #e1e9e9;
+    $q2: #bccac9;
+    $q3: #141816;
+    $q4: #4b573c;
+    $q5: #928c4f;
     .container {
-        height: 300px;
-        width: 200px;
-        background-color: $c9;
+        height: 280px;
+        width: 170px;
+        background-color: $q4;
         border-radius: 10px;
         z-index: 1;
         padding-top: 10px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        box-shadow: 3px 4px 4px black;
         margin-left: 20px;
         margin-right: 20px;
         margin-top: 20px;
@@ -30,7 +34,7 @@
     }
     
     .buttonNotBuy {
-        margin-top: -60px;
+        margin-top: -75px;
         margin-left: 30px;
         height: 50px;
         width: 50px;
@@ -39,17 +43,16 @@
     
     .name {
         height: 30px;
-        font-size: 20px;
-        margin-top: -20px;
+        font-size: 18px;
+        margin-top: 1px;
         margin-right: 10px;
-        color: $p2;
+        color: white;
         font-weight: bold;
         z-index: 3;
     }
     
     .price {
-        box-shadow: 3px 4px 4px black;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-left: -30px;
         background-color: $p1;
         width: 70px;
@@ -62,35 +65,35 @@
         -webkit-border-radius: 50px;
         border-radius: 50px;
         text-align: center;
-        padding-top: 5px;
+        padding-top: 9px;
         z-index: 3;
     }
     
     .count {
         width: 50px;
         height: 50px;
-        background-color: $p5;
+        background-color: $q3;
         -moz-border-radius: 50px;
         -webkit-border-radius: 50px;
         border-radius: 50px;
-        box-shadow: 3px 4px 4px black;
         font-size: 25px;
         margin-top: -30px;
-        margin-left: 150px;
+        margin-left: 130px;
         text-align: center;
-        padding-top: 5px;
-        color: $p1;
+        padding-top: 13px;
+        color: white;
         z-index: 3;
     }
     
     .imageImage {
-        width: 10.5em;
-        height: 10.5em;
-        z-index: 2;
+        width: 10em;
+        height: 10em;
+        z-index: 5;
     }
     
     .author {
-        margin-top: 20px;
-        font-size: 18px;
-        color: white;
+        margin-top: 30px;
+        font-size: 14px;
+        color: $q2;
+        font-weight: bold;
     }

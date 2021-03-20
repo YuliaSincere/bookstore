@@ -14,11 +14,16 @@
     $c8:#261700;
     $c9:#561102;
     $c10:#a03002;
+
+    $q1: #e1e9e9;
+    $q2: #bccac9;
+    $q3: #141816;
+    $q4: #4b573c;
+    $q5: #928c4f;
     //other
     $main-margin: 1%;
     .childContainer {
-        height: 860px;
-        background-color: rgb(255, 255, 255);
+        background-color: $q4;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -27,18 +32,19 @@
     
     .bookstorePlacement {
         padding: 2px;
-        background-color: $c4;
-        flex: 1;
+        background-color: $q2;
         margin-right: 0.5%;
-        border-bottom-right-radius: 10%;
-        margin-bottom: 20px;
+        //margin-bottom: 20px;
+        height: 100%;
+        position: absolute; left: 0; top: 0; width: 50%;
     }
     
     .userplacePlacement {
-        background-color: rgb(255, 255, 255);
-        flex: 1;
-        margin-bottom: $main-margin;
+        background-color: white;
+        //margin-bottom: $main-margin;
         margin-left: 0.5%;
+        height: 100%;
+        position: absolute; right: 0; top: 0; width: 50%;
     }
     
     .authorizationPlacement {

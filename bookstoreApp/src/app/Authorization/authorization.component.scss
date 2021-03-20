@@ -13,6 +13,13 @@
  $c8:#261700;
  $c9:#561102;
  $c10:#a03002;
+
+
+ $q1: #e1e9e9;
+ $q2: #bccac9;
+ $q3: #141816;
+ $q4: #4b573c;
+ $q5: #928c4f;
  //
  .enter {
      margin-top: -5px;
@@ -22,55 +29,62 @@
  }
  
  .buttonEnter {
-     background-color: $c7;
+     background-color: $q4;
      font-size: 24px;
      width: auto;
      height: 50px;
      margin-bottom: 20px;
+     color: $q1;
  }
  
- .container {
-     align-content: center;
+ body{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 10%;
  }
  
  .buttonGet {
-     background-color: $c9;
+     background-color: $q4;
      font-size: 24px;
      width: auto;
      height: 50px;
+     color: $q1;
  }
  
  .authorizationContainer1 {
      text-align: center;
-     background-color: $c3;
+     background-color: $q1;
      width: max-content;
      height: max-content;
      border-radius: 10px;
-     box-shadow: 4px 4px 4px black;
-     margin-left: 40%;
-     margin-top: 100px;
+     //margin-left: 40%;
+     margin-left: auto;
+     margin-right: auto;
      padding-top: 30px;
      padding-bottom: 20px;
      padding-right: 5px;
      padding-left: 5px;
-     margin-bottom: 10px;
-     //  padding-right: 70px;
-     //  padding-left: 70px;
+     padding-right: 70px;
+     padding-left: 70px;
  }
  
  .authorizationContainer2 {
      text-align: center;
-     background-color: $c3;
+     align-items: center;
+     background-color: $q1;
      width: 310px;
      height: max-content;
      border-radius: 10px;
-     box-shadow: 4px 4px 4px black;
      margin-top: 10px;
-     margin-left: 40%;
+     //margin-left: 40%;
+     margin-left: auto;
+     margin-right: auto;
+     margin-top: 30px;
      padding-top: 30px;
      padding-bottom: 20px;
-     //  padding-right: 70px;
-     //  padding-left: 70px;
  }
  
  .LabelPromo1 {
@@ -79,17 +93,17 @@
      width: 300px;
      margin-bottom: 20px;
      margin-left: 0px;
-     color: white;
+     color: $q3;
      font-weight: bolder;
  }
  
  .LabelPromo2 {
-     font-weight: bolder;
-     font-size: 20px;
-     color: white;
-     text-align: center;
-     width: 300px;
-     margin-bottom: 20px;
+    text-align: center;
+    font-size: 20px;
+    width: 300px;
+    margin-bottom: 20px;
+    color: $q3;
+    font-weight: bolder;
  }
  
  #promo {
