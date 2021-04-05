@@ -1,13 +1,15 @@
-<div class="container">
-    <!-- <div class="count">{{bookInCart.bookCount}}</div> -->
+<div class="mainContainer">
+    <div class="container">
     <div class="name">{{bookInCart.name}}</div>
     <div class="author">{{bookInCart.author}}</div>
-    <div class="image">
+</div>
+    <div class="imageContainer">
         <img class="imageImage" src="{{bookInCart.image}}">
-    </div>
-    <div class="price">{{bookInCart.price}}<br> руб.</div>
-
-    <div class="buttonNotBuy">
-        <app-buttonNotBuy [book]="bookInCart"></app-buttonNotBuy>
+        <div class="count">{{bookInCart.bookCount}}</div>
+        <div class="price">{{bookInCart.price}}<br> руб.</div>
+        <div class="buttonNotBuy">
+        <app-buttonNotBuy [book]="bookInCart"></app-buttonNotBuy>  
     </div>
 </div>
+</div>
+

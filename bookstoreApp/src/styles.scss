@@ -1,32 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
-
-// color palette
-$p1:#f4f6ff;
-$p2:#ffcb74;
-$p3:#ea907a;
-$p4:#4f8a8b;
-$c1:#040a00;
-$c2:#361e04;
-$c3:#7b3804;
-$c4:#c57129;
-$c5:#151702;
-$c6:#8b3301;
-$c7:#2a3a09;
-$c8:#261700;
-$c9:#561102;
-$c10:#a03002;
 html,
 body {
     height: 100%;
 }
 
 body {
-    margin: 0;
+    margin: 0px;
+    padding: 0px;
     font-family:'Courier New', Courier, monospace;
+    background-color:#bccac9;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 0px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family:'Courier New', Courier, monospace; }

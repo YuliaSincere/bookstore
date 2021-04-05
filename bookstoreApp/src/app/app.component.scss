@@ -4,22 +4,15 @@ $p2:rgb(156, 151, 200);
 $o1:rgb(240, 102, 65);
 $o2:rgb(251, 218, 198);
 .mainContainer {
-    height: 710px;
+    height: 100%;
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
     display: flex;
-    flex-direction: column;
-    margin: -8px;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
 }
 
 .appContentPlacement {
-    height: 640px;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-}
-
-.appFooterPlacement {
-    height: 70px;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
 }

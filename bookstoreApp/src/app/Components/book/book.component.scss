@@ -22,41 +22,65 @@
     .container {
         height: 280px;
         width: 170px;
-        background-color: $q5;
         border-radius: 10px;
-        z-index: 1;
-        padding-top: 10px;
+        z-index: 4;
+        padding: 10px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
+        position: relative;
+    }
+
+    .mainContainer {
         margin-left: 20px;
         margin-right: 20px;
         margin-top: 20px;
+        margin-bottom: 20px;
+        height: 280px;
+        width: 170px;
+        border-radius: 10px;
+        z-index: 1;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        position: relative;
+    }
+
+    .imageContainer {
+        margin-left: -100px;
+        margin-right: 20px;
+        margin-top: 20px;
         margin-bottom: 50px;
+        height: 280px;
+        width: 170px;
+        border-radius: 10px;
+        z-index: 3;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        position: relative;
     }
     
     .buttonBuy {
-        margin-top: -75px;
-        margin-left: 30px;
+        margin-top: -45px;
+        margin-left: 110px;
         height: 50px;
         width: 50px;
-        z-index: 3;
+        z-index: 5;
+        position: relative;
     }
     
     .name {
         height: 30px;
         font-size: 18px;
-        margin-top: -20px;
+        margin-top: 0px;
         margin-right: 10px;
         color: white;
         font-weight: bold;
-        z-index: 3;
+        z-index: 4;
+        position: relative;
     }
     
     .price {
-        margin-top: 10px;
-        margin-left: -30px;
+        margin-top: 150px;
+        margin-left: 60px;
         background-color: $p1;
         width: 70px;
-        height: 70px;
+        height: 60px;
         color: black;
         border-radius: 10px;
         font-size: 20px;
@@ -66,34 +90,42 @@
         border-radius: 50px;
         text-align: center;
         padding-top: 9px;
-        z-index: 3;
+        z-index: 5;
+        position: relative;
     }
     
     .count {
         width: 50px;
-        height: 50px;
+        height: 35px;
         background-color: $q3;
         -moz-border-radius: 50px;
         -webkit-border-radius: 50px;
         border-radius: 50px;
         font-size: 25px;
-        margin-top: -30px;
-        margin-left: 130px;
+        margin-top: -270px;
+        margin-left: 240px;
         text-align: center;
-        padding-top: 13px;
+        padding-top: 14px;
         color: white;
-        z-index: 3;
+        z-index: 5;
+        position: relative;
     }
     
     .imageImage {
-        width: 10em;
-        height: 10em;
-        z-index: 5;
+        margin-top: -250px;
+        margin-left: 80px;
+        border-radius: 10px;
+        width: 190px;
+        height: 240px;
+        z-index: 1;
+        position: relative;
     }
     
     .author {
-        margin-top: 30px;
+        margin-top: 10px;
         font-size: 14px;
         color: $q3;
         font-weight: bold;
+        z-index: 4;
+        position: relative;
     }

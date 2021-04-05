@@ -94,12 +94,15 @@ namespace bookstoreApp.Controllers
 
         [Route("cart/add")]
         [HttpPost]
-        public bool AddBookToCart(AddBookDto addBookDto)
+        public JsonResult AddBookToCart(AddBookDto addBookDto)
         {
             if (!_context.Books.Any(book => book.Id == addBookDto.BookId))
             {
-                return false;
+                // С клиента пришел айди несуществующей книги.
+                return Json("Не существует такой книги");
             }
+
+            // Получение записи об определенной книге в корзине для определенного покупателя.
             Guid newCustomerId = Guid.Parse(addBookDto.CustomerId);
             var cartItem = _context.Cart
                 .SingleOrDefault(c => c.BookId == addBookDto.BookId
@@ -111,6 +114,10 @@ namespace bookstoreApp.Controllers
                 cartItem = new Cart { BookId = addBookDto.BookId, CustomerId = newCustomerId, BookCount = 0 };
                 _context.Add(cartItem);
             }
+            else {
+                // Запись о такой книге в корзине есть.
+                return Json("Нельзя добавить в корзину более одного экземпляра конкретной книги");
+            }
             if (cartItem.BookCount < 1)
             {
                 cartItem.BookCount++;
@@ -121,7 +128,7 @@ namespace bookstoreApp.Controllers
                         .SingleOrDefault(s => s.BookId == addBookDto.BookId && s.Count > 0);
                     if (storeItem == null)
                     {
-                        return false;
+                        return Json("Данной книги нет в наличии");
                     }
                     storeItem.Count--;
                     _context.SaveChanges();
@@ -129,7 +136,7 @@ namespace bookstoreApp.Controllers
                 _context.SaveChanges();
                 UpdateCart(newCustomerId);
             }
-            return true;
+            return Json(string.Empty);
         }
 
         [Route("cart/remove")]

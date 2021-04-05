@@ -5,6 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { CheckoutButtonnComponent } from './Components/checkoutButton/checkoutBu
 import { OrderComponent } from './Components/order/order.component';
 import { BookInOrderComponent } from './Components/bookInOrder/bookInOrder.component';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
+import { NotGuidMessageBox } from './Components/notGuidMessageBox/notGuidMessageBox.component';
+import { NoMoreBook } from './Components/no-more-book/no-more-book.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { CheckoutComponent } from './Components/checkout/checkout.component';
     CheckoutButtonnComponent,
     OrderComponent,
     BookInOrderComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    NotGuidMessageBox,
+    NoMoreBook
   ],
   imports: [
     BrowserModule,
@@ -57,7 +62,8 @@ import { CheckoutComponent } from './Components/checkout/checkout.component';
     MatFormFieldModule,
     MatButtonModule,
     MatGridListModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [BookProvider, CartService, CustomerService],
   bootstrap: [AppComponent]

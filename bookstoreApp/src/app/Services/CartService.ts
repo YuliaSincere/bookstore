@@ -41,10 +41,10 @@ export class CartService {
     /**
      * Добавление книги в корзину.
      */
-    addBookToCart(bookId: number): Promise<boolean> {
+    addBookToCart(bookId: number): Promise<string> {
         const data = { bookId: bookId, customerId: this.customerService.customerId.toString() };
         return this.http
-            .post<boolean>(this.addBookToCartUrl, data)
+            .post<string>(this.addBookToCartUrl, data)
             .toPromise();
     }
 

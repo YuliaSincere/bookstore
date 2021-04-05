@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { Guid } from "guid-typescript";
 import { Router } from '@angular/router';
 import { CustomerService } from '../Services/CustomerService';
-import { GuidService } from '../Services/GuidService';
+import { GuidService } from '../Services/GuidService'; 
+import { Inject} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog'; 
+import { NotGuidMessageBox } from '../Components/notGuidMessageBox/notGuidMessageBox.component';
 
 @Component({
     selector: 'app-authorization',
@@ -11,7 +14,7 @@ import { GuidService } from '../Services/GuidService';
 })
 
 export class AuthorizationComponent {
-    constructor(private router: Router, private customerService: CustomerService) {
+    constructor(private router: Router, private customerService: CustomerService, private dialog: MatDialog) {
         this.customerService = customerService;
      }
     customerId: string;
@@ -19,6 +22,7 @@ export class AuthorizationComponent {
         const guid = GuidService.toGuid(this.customerId);
 
         if (!guid) {
+            const dialogRef = this.dialog.open(NotGuidMessageBox);
             return;
         }
 
